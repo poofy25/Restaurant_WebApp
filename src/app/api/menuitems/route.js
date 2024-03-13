@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
 import MenuItem from "../../../models/MenuItem";
-import { uploadPhoto } from '@/app/actions/MenuItemFormActions'
 
 
 export const GET = async (request) => {
@@ -19,7 +18,6 @@ export const POST = async (request) => {
     try{
         await connectToDB()
         const data = await request.json()
-        console.log(data)
         const createdMenuItem = await MenuItem.create(data)
 
         return new NextResponse(createdMenuItem)
