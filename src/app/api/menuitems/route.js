@@ -6,7 +6,7 @@ export const GET = async () => {
     try{
         await connectToDB()
 
-        const menuItems = await MenuItem.find()
+        const menuItems = await MenuItem.find().sort({ createdAt: -1 });
         // const data = [{test:"Hiiiii"}]
         const data = menuItems
         const jsonData = JSON.stringify(data); // Stringify data
