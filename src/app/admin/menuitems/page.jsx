@@ -2,14 +2,9 @@ import Image from "next/image"
 
 
 export default async function AdminMenuItemsPage () {
-    let data
-    try{
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 60 } })
-    const resData = await response.json()
-    data = resData
-    } catch (error) {
-        throw new Error(error)
-    }
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 0 } })
+    const data = await response.json()
+   
     console.log(data , JSON.stringify(data))
     return (
         <menu>
