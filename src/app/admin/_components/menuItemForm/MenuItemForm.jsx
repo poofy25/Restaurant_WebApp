@@ -56,7 +56,7 @@ export default function MenuItemForm () {
             alert("Photo uploaded successfully to cloudinary!")
             const newFormData = new FormData()
 
-            newFormData.append('imagePath' , res?.photoUrl)
+            newFormData.append('imageUrl' , res?.photoUrl)
             newFormData.append('name', name)
             newFormData.append('category', category)
             newFormData.append('description', description)
@@ -67,6 +67,7 @@ export default function MenuItemForm () {
                 method:"POST",
                 body:JSON.stringify(Object.fromEntries(newFormData))
             })
+            // const data = await databaseResponse.json() || "NO DATA"
             console.log(databaseResponse)
         } else { alert("Error : " , res?.error) }
 
@@ -94,7 +95,7 @@ export default function MenuItemForm () {
             <label>Description</label>
             <input type="text" onChange={(e)=>{setDescription(e.target.value)}} value={description} required/>
             <label>Price</label>
-            <input type="Number" onChange={(e)=>{setPrice(e.target.value)}} value={price} required/>
+            <input type="text" onChange={(e)=>{setPrice(e.target.value)}} value={price} required/>
             <label>Weight</label>
             <input type="text" onChange={(e)=>{setWeight(e.target.value)}} value={weight} required/>
 
