@@ -47,7 +47,12 @@ export async function uploadPhoto (formData) {
 
         //Upload photos to Cloudinary
         const photos = await uploadPhotoToCloudinary(newFiles)
-        const photoUrl = `/${photos[0].public_id}.${photos[0].format}`
+
+        // const photoUrl = `/${photos[0].public_id}.${photos[0].format}`
+        // console.log(photos)
+        const photoUrl = photos[0].secure_url
+
+
         // Delete photo files from temp folder after successful upload
         newFiles.map(file => fs.unlink(file.filepath))
 
