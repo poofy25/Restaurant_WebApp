@@ -10,7 +10,7 @@ export default function AdminMenuItemsPage () {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`/api/menuitems`);
+            const response = await fetch(`/api/menuitems` , { next: { revalidate: 300 } } );
             const fetchedData = await response.json();
             setData(fetchedData);
             };
@@ -24,7 +24,7 @@ export default function AdminMenuItemsPage () {
             {data.map((item , index) => {
                 return (
                     <div key={index}>
-                    <Image src={item.imageUrl} width="100" height="100"/>
+                    <Image src={item.imageUrl} width="500" height="300"/>
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     <h4>{item.price}</h4>
