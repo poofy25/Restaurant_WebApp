@@ -7,10 +7,17 @@ export const GET = async () => {
         await connectToDB()
 
         const menuItems = await MenuItem.find()
-        const data = [{test:"Hiiiii"}]
+        // const data = [{test:"Hiiiii"}]
+        const data = menuItems
         const jsonData = JSON.stringify(data); // Stringify data
 
-        return new NextResponse(jsonData)
+        return new NextResponse(jsonData, {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json', // Set content type
+            },
+          });
+        
     } catch (error) {
         return new NextResponse("Error fetching data" + error)
     }
