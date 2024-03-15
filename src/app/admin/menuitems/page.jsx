@@ -4,7 +4,6 @@ import Image from "next/image"
 export default async function AdminMenuItemsPage () {
     const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 60 } })
     const data = await response.json()
-    console.log(data)
     return (
         <menu>
             Menu Items
