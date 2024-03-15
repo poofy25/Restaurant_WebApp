@@ -2,14 +2,15 @@ import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
 import MenuItem from "../../../models/MenuItem";
 
-
 export const GET = async () => {
     try{
         await connectToDB()
 
         const menuItems = await MenuItem.find()
-        const data = JSON.stringify(menuItems)
-        return new NextResponse(data)
+        const data = [{test:"Hiiiii"}]
+        const jsonData = JSON.stringify(data); // Stringify data
+
+        return new NextResponse(jsonData)
     } catch (error) {
         return new NextResponse("Error fetching data" + error)
     }
