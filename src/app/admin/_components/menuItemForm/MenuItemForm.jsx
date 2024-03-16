@@ -4,20 +4,23 @@ import styles from './menuItemForm.module.scss'
 import { useState , useRef } from 'react'
 import MenuItemFormPhotoCard from './MenuItemFormPhotoCard'
 import MenuItemFormSubmitBtn from './MenuItemFormSubmitBtn'
+import MenuItem from '@/components/MenuItem'
 
 import { uploadPhoto } from '@/app/actions/MenuItemFormActions'
 
 import menuCategories from '@/utils/menuCategoriesJSON'
 
-export default function MenuItemForm ({data}) {
-    console.log(data)
+import noImageIMG from '/public/imgs/no-image.jpg'
+
+export default function MenuItemForm ({data:editData}) {
+    
     const formRef = useRef()
     const [file, setFile] = useState([])
-    const [name, setName] = useState(data?.name || '')
-    const [category, setCategory] = useState(data?.category || '')
-    const [description, setDescription] = useState(data?.description || '')
-    const [price, setPrice] = useState(data?.price || '')
-    const [weight, setWeight] = useState(data?.weight || '')
+    const [name, setName] = useState(editData?.name || '')
+    const [category, setCategory] = useState(editData?.category || '')
+    const [description, setDescription] = useState(editData?.description || '')
+    const [price, setPrice] = useState(editData?.price || '')
+    const [weight, setWeight] = useState(editData?.weight || '')
 
 
     async function handleInputFile (e) {
@@ -33,64 +36,95 @@ export default function MenuItemForm ({data}) {
         setFile([...newFile])
     }
 
-    async function handleDelete (index) {
-        console.log(index)
-        const newFile = file.filter((_, i)=> i !== index)
-        setFile(newFile)
-        formRef.current.reset()
-    }
-
     async function handleSubmit () {
-        if(!file.length) return alert('No image files are selected!')
+        // Handle submit for  creation
+        if(!editData){
+            if(!file.length) return alert('No image files are selected!')
 
-        const formData = new FormData()
+            const formData = new FormData()
 
-        file.forEach(currentFile => {
-            formData.append('files', currentFile)
-        })
-        
-        
-        // Upload photo to Cloud
-        const res = await uploadPhoto(formData)
-        console.log(res)
-        
-        if(res?.photoUrl && res?.photoId) {
-            console.log("Photo uploaded successfully to cloudinary!")
+            file.forEach(currentFile => {
+                formData.append('files', currentFile)
+            })
+            
+            
+            // Upload photo to Cloud
+            const res = await uploadPhoto(formData)
+            
+            if(res?.photoUrl && res?.photoId) {
+                const newFormData = new FormData()
+
+                newFormData.append('imageUrl' , res?.photoUrl)
+                newFormData.append('imageId' , res?.photoId)
+                newFormData.append('name', name)
+                newFormData.append('category', category)
+                newFormData.append('description', description)
+                newFormData.append('price', price)
+                newFormData.append('weight', weight)
+
+                const databaseResponse = await fetch('/api/menuitems',{
+                    method:"POST",
+                    body:JSON.stringify(Object.fromEntries(newFormData))
+                })
+                const data = await databaseResponse.json() 
+            } else { alert("Error : " , res?.error) }
+
+            setFile([])
+            setName('')
+            setCategory('')
+            setDescription('')
+            setPrice('')
+            setWeight('')
+            formRef.current.reset()
+        }
+        // Handle submit for edit 
+        if(editData){
+            // Form Data for uploading to cloud
+            const formData = new FormData()
+            // Form Data for uploading to DB
             const newFormData = new FormData()
 
-            newFormData.append('imageUrl' , res?.photoUrl)
-            newFormData.append('imageId' , res?.photoId)
+            newFormData.append('imageUrl' , editData.imageUrl)
+            newFormData.append('imageId' , editData.imageId)
             newFormData.append('name', name)
             newFormData.append('category', category)
             newFormData.append('description', description)
             newFormData.append('price', price)
             newFormData.append('weight', weight)
 
-            const databaseResponse = await fetch('/api/menuitems',{
-                method:"POST",
+            // Check if the image has been edited
+            const isNewImage = file[0] ? true : false
+            if(isNewImage){
+
+                file.forEach(currentFile => {
+                    formData.append('files', currentFile)
+                })
+
+                // Upload photo to Cloud
+                const res = await uploadPhoto(formData)
+                if(res?.photoUrl && res?.photoId) {
+                    newFormData.append('imageUrl' , res?.photoUrl)
+                    newFormData.append('imageId' , res?.photoId)
+                } else { alert("Error : " , res?.error) }
+
+
+            }
+            const databaseResponse = await fetch(`/api/menuitems/${editData._id}`,{
+                method:"PUT",
                 body:JSON.stringify(Object.fromEntries(newFormData))
             })
             const data = await databaseResponse.json() 
-            console.log(data)
-        } else { alert("Error : " , res?.error) }
-
-        // setFile([])
-        // setName('')
-        // setCategory('')
-        // setDescription('')
-        // setPrice('')
-        // setWeight('')
-        // formRef.current.reset()
-
+        
+        }
     }
 
 
-
     return (
+        <div>
         <form action={handleSubmit} ref={formRef} className={styles.form}>
         
             <label>Image</label>
-            <input type="file" required accept="image/*" onChange={handleInputFile}/>
+            <input type="file" required={false} accept="image/*" onChange={handleInputFile}/>
             <label>Name</label>
             <input type="text" onChange={(e)=>{setName(e.target.value)}} value={name} required/>
             <label>Category</label>
@@ -111,13 +145,16 @@ export default function MenuItemForm ({data}) {
             <input type="text" onChange={(e)=>{setWeight(e.target.value)}} value={weight} required/>
 
             <MenuItemFormSubmitBtn value="Upload"/>
-            
-
-            {file.map((value , index) => {
-                return(
-                <MenuItemFormPhotoCard url={URL.createObjectURL(value)} onClick={()=>{handleDelete(index)}} key={index}/>
-                )
-            })}
+        
         </form>
+        <MenuItem data={{
+            name,
+            category,
+            description,
+            price,
+            weight,
+            imageUrl:file[0] && URL.createObjectURL(file[0]) || editData?.imageUrl  ||  noImageIMG
+        }}/>
+        </div>
     )
 } 
