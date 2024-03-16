@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
 import MenuItem from "../../../models/MenuItem";
 
-import { deletePhoto } from "@/app/actions/MenuItemFormActions";
 
 export const GET = async () => {
     try{

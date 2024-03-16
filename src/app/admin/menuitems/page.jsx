@@ -11,7 +11,6 @@ async function GetMenuItems () {
 export default async function AdminMenuItemsPage () {
     
     const data = await GetMenuItems()
-    console.log("ADMIN MENU ITEMS PAGE : " , data)
    
     return (
         <main style={{display:"flex" , flexWrap:"wrap" , padding:"1rem" , justifyContent:"center"}}>

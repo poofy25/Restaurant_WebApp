@@ -3,6 +3,27 @@ import { deletePhoto } from "@/app/actions/MenuItemFormActions";
 import connectToDB from '@/utils/connectToDB.js'
 import MenuItem from "@/models/MenuItem";
 
+
+export const GET = async (req, {params}) => {
+    try{
+        await connectToDB()
+        const id = params.id[0]
+        const menuItems = await MenuItem.find({_id:id})
+        const data = menuItems
+        const jsonData = JSON.stringify(data);
+
+        return new NextResponse(jsonData, {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+        
+    } catch (error) {
+        return new NextResponse(error)
+    }
+}
+
 export const DELETE = async (request) => {
   
     try{

@@ -9,15 +9,15 @@ import { uploadPhoto } from '@/app/actions/MenuItemFormActions'
 
 import menuCategories from '@/utils/menuCategoriesJSON'
 
-export default function MenuItemForm () {
-
+export default function MenuItemForm ({data}) {
+    console.log(data)
     const formRef = useRef()
     const [file, setFile] = useState([])
-    const [name, setName] = useState('')
-    const [category, setCategory] = useState('')
-    const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
-    const [weight, setWeight] = useState('')
+    const [name, setName] = useState(data?.name || '')
+    const [category, setCategory] = useState(data?.category || '')
+    const [description, setDescription] = useState(data?.description || '')
+    const [price, setPrice] = useState(data?.price || '')
+    const [weight, setWeight] = useState(data?.weight || '')
 
 
     async function handleInputFile (e) {

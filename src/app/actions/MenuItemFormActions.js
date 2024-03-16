@@ -70,8 +70,8 @@ export async function deletePhoto (public_id) {
     try {
 
         await cloudinary.v2.uploader.destroy(public_id)
-        
-        revalidatePath("/")
+
+        revalidatePath("/admin/menuitems")
         return { message : "Deleted successfully from cloudinary ", ok:true}
         
     } catch (error) {
