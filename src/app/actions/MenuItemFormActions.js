@@ -6,6 +6,8 @@ import os from 'os'
 
 import cloudinary from 'cloudinary'
 
+import { revalidatePath } from 'next/cache'
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
@@ -64,24 +66,12 @@ export async function uploadPhoto (formData) {
     }
 }
 
-export async function getAllPhotos () {
-    try {
-
-        const result = await cloudinary.v2.search.expression(
-            'folder:Restaurant_Menu_Items/*'
-        ).sort_by('created_at', 'desc').execute()
-
-        return result
-    } catch (error) {
-        return { error : error }
-    }
-}
-
 export async function deletePhoto (public_id) {
     try {
 
         await cloudinary.v2.uploader.destroy(public_id)
-
+        
+        revalidatePath("/")
         return { message : "Deleted successfully from cloudinary ", ok:true}
         
     } catch (error) {

@@ -4,12 +4,11 @@ import connectToDB from '@/utils/connectToDB.js'
 import MenuItem from "@/models/MenuItem";
 
 export const DELETE = async (request) => {
+  
     try{
         const data = await request.json()
         await connectToDB()
-        console.log("DATA : " , data)
         const deletePhotoRes = await deletePhoto(data.imageId)
-        console.log("delete PHOTO RES : " , deletePhotoRes)
         if (deletePhotoRes.ok) {
             const dbRes = await MenuItem.deleteOne({_id:data.id});
             if (dbRes.deletedCount === 1) {
