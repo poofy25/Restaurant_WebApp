@@ -7,14 +7,13 @@ export const GET = async () => {
         await connectToDB()
 
         const menuItems = await MenuItem.find().sort({ createdAt: -1 });
-        // const data = [{test:"Hiiiii"}]
         const data = menuItems
-        const jsonData = JSON.stringify(data); // Stringify data
+        const jsonData = JSON.stringify(data);
 
         return new NextResponse(jsonData, {
             status: 200,
             headers: {
-              'Content-Type': 'application/json', // Set content type
+              'Content-Type': 'application/json',
             },
           });
         

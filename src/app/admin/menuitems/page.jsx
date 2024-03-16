@@ -1,22 +1,28 @@
-'use client'
+// 'use client'
 
 
 import Image from "next/image"
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+
+async function GetMenuItems () {
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 300 } } )
+    return await response.json()
+  }
 
 
-export default function AdminMenuItemsPage () {
-    const [data, setData] = useState([]);
+export default async function AdminMenuItemsPage () {
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch(`/api/menuitems` , { next: { revalidate: 300 } } );
-            const fetchedData = await response.json();
-            setData(fetchedData);
-            };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch(`/api/menuitems` , { next: { revalidate: 300 } } );
+    //         const fetchedData = await response.json();
+    //         setData(fetchedData);
+    //         };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
+    const data = await GetMenuItems()
    
     return (
         <menu>
