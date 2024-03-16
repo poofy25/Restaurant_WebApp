@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import MenuItem from "@/components/MenuItem"
 
 async function GetMenuItems () {
   const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 300 } } )
@@ -8,10 +9,13 @@ async function GetMenuItems () {
 
 export default async function Home() {
   const data = await GetMenuItems()
-  console.log("MAIN PAGE : " , data)
   return (
     <main className={styles.main}>
-      
+      {data.map((item , index) => {
+        return (
+          <MenuItem data={item} key={index}/>
+        )
+      })}
     </main>
   );
 }

@@ -4,6 +4,7 @@ import Image from "next/image"
 
 import { useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 export default function MenuItemAdmin ( { data } ) {
 
@@ -22,9 +23,13 @@ export default function MenuItemAdmin ( { data } ) {
             });
             console.log("Response : " , response)
             const responseData = await response.json();
+            router.refresh()
             console.log(responseData)
-            // router.refresh()
     };
+    const handleEdit = () => {
+        console.log("working")
+        router.push(`/admin/edit/${data._id}`)
+    }
     
 
 
@@ -36,7 +41,7 @@ export default function MenuItemAdmin ( { data } ) {
             <p className={styles.description}>{data.description}</p>
             <h4 className={styles.price}>{data.price} lei</h4>
             <h5 className={styles.weight}>{data.weight} g</h5>
-            <button className={styles.editBtn}>Edit</button>
+            <button onClick={handleEdit} className={styles.editBtn}>Edit</button>
             <button onClick={()=>startTransition(handleDelete)} disabled={isPending} className={styles.deleteBtn}>
                 {isPending ? "Deleting..." : "Delete"}
             </button>
