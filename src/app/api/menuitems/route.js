@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
 import MenuItem from "../../../models/MenuItem";
 
+import { deletePhoto } from "@/app/actions/MenuItemFormActions";
+
 export const GET = async () => {
     try{
         await connectToDB()
@@ -18,7 +20,7 @@ export const GET = async () => {
           });
         
     } catch (error) {
-        return new NextResponse("Error fetching data" + error)
+        return new NextResponse(JSON.stringify(error))
     }
 }
 
@@ -27,9 +29,15 @@ export const POST = async (request) => {
         await connectToDB()
         const data = await request.json()
         const createdMenuItem = await MenuItem.create(data)
-        return new NextResponse(createdMenuItem , data)
+        return new NextResponse(JSON.stringify(createdMenuItem) , {
+            status: 200,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
     } catch (error) {
-        return new NextResponse("Error posting data" + error)
+        return new NextResponse(JSON.stringify(error))
     }
 }
+
 

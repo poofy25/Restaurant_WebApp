@@ -20,6 +20,10 @@ const MenuItemSchema = new Schema({
         type:String,
         required:true
     },
+    imageId:{
+        type:String,
+        required:true
+    },
     description:{
         type:String,
         required:true
