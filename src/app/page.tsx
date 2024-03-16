@@ -8,7 +8,7 @@ async function GetMenuItems () {
 
 export default async function Home() {
   const data = await GetMenuItems()
-  console.log(data)
+  console.log("MAIN PAGE : " , data)
   return (
     <main className={styles.main}>
       

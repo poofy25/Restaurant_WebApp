@@ -1,0 +1,63 @@
+.item {
+    width: auto;
+    width: clamp(150px,20vw,300px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    border-radius: 8px;
+    gap: 0.5rem;
+    transition: 0.125s ease-in-out;
+    cursor: pointer;
+}
+.item:hover {
+    border: 1px solid yellow;
+}
+.item:hover .editBtn{
+    background-color: green;
+}
+
+.item > img {
+    aspect-ratio: 10/14;
+    width: 100%;
+    flex: 1;
+    border-radius: 8px;
+
+}
+
+.description , .name , .category {
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1;
+           line-clamp: 1; 
+   -webkit-box-orient: vertical;
+}
+
+.editBtn , .deleteBtn {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.editBtn {
+    border: 1px solid green;
+}
+.editBtn:hover{
+    background-color: green;
+}
+.deleteBtn {
+    border: 1px solid red;
+}
+.deleteBtn:hover {
+    background-color: red;
+}
+.editBtn:has(+ .deleteBtn:hover){
+    background-color: transparent;
+}

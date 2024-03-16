@@ -1,43 +1,26 @@
-// 'use client'
 
 
-import Image from "next/image"
-// import { useState, useEffect } from 'react';
+import MenuItemAdmin from "../_components/MenuItemAdmin/MenuItemAdmin"
 
 async function GetMenuItems () {
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 300 } } )
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 60 } } )
     return await response.json()
-  }
+}
 
 
 export default async function AdminMenuItemsPage () {
-    // const [data, setData] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch(`/api/menuitems` , { next: { revalidate: 300 } } );
-    //         const fetchedData = await response.json();
-    //         setData(fetchedData);
-    //         };
-
-    //     fetchData();
-    // }, []);
+    
     const data = await GetMenuItems()
+    console.log("ADMIN MENU ITEMS PAGE : " , data)
    
     return (
-        <menu>
-            Menu Items
+        <main style={{display:"flex" , flexWrap:"wrap" , padding:"1rem" , justifyContent:"center"}}>
+           <h1 style={{width:"100%" , textAlign:"center"}}>MENU ITEMS</h1>
             {data.map((item , index) => {
                 return (
-                    <div key={index}>
-                    <Image src={item.imageUrl} width="500" height="300"/>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <h4>{item.price}</h4>
-                    <h5>{item.weight}</h5>
-                    </div>
+                    <MenuItemAdmin data={item} key={index}/>
                 )
             })}
-        </menu>
+        </main>
     )
 }

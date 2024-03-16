@@ -51,12 +51,13 @@ export async function uploadPhoto (formData) {
         // const photoUrl = `/${photos[0].public_id}.${photos[0].format}`
         // console.log(photos)
         const photoUrl = photos[0].secure_url
+        const photoId = photos[0].public_id
 
 
         // Delete photo files from temp folder after successful upload
         newFiles.map(file => fs.unlink(file.filepath))
 
-        return { photoUrl : photoUrl}
+        return { photoUrl : photoUrl , photoId : photoId}
 
     } catch (error) {
         return { error : error }
@@ -81,9 +82,8 @@ export async function deletePhoto (public_id) {
 
         await cloudinary.v2.uploader.destroy(public_id)
 
-        return { message : "Deleted successfully from cloudinary "}
+        return { message : "Deleted successfully from cloudinary ", ok:true}
         
-        return result
     } catch (error) {
         return { error : error }
     }

@@ -7,6 +7,8 @@ import MenuItemFormSubmitBtn from './MenuItemFormSubmitBtn'
 
 import { uploadPhoto } from '@/app/actions/MenuItemFormActions'
 
+import menuCategories from '@/utils/menuCategoriesJSON'
+
 export default function MenuItemForm () {
 
     const formRef = useRef()
@@ -52,11 +54,12 @@ export default function MenuItemForm () {
         const res = await uploadPhoto(formData)
         console.log(res)
         
-        if(res?.photoUrl) {
+        if(res?.photoUrl && res?.photoId) {
             alert("Photo uploaded successfully to cloudinary!")
             const newFormData = new FormData()
 
             newFormData.append('imageUrl' , res?.photoUrl)
+            newFormData.append('imageId' , res?.photoId)
             newFormData.append('name', name)
             newFormData.append('category', category)
             newFormData.append('description', description)
@@ -67,8 +70,8 @@ export default function MenuItemForm () {
                 method:"POST",
                 body:JSON.stringify(Object.fromEntries(newFormData))
             })
-            // const data = await databaseResponse.json() || "NO DATA"
-            console.log(databaseResponse)
+            const data = await databaseResponse.json() 
+            console.log(data)
         } else { alert("Error : " , res?.error) }
 
         // setFile([])
@@ -91,12 +94,20 @@ export default function MenuItemForm () {
             <label>Name</label>
             <input type="text" onChange={(e)=>{setName(e.target.value)}} value={name} required/>
             <label>Category</label>
-            <input type="text" onChange={(e)=>{setCategory(e.target.value)}} value={category} required/>
+            <select onChange={(e)=>{setCategory(e.target.value)}} value={category} required>
+                <option value="">Chose Category</option>
+                {menuCategories.map((ctgr , index) => {
+                    return (
+                        <option key={index} value={ctgr}>{ctgr}</option>
+                    )
+                })}
+
+            </select>
             <label>Description</label>
             <input type="text" onChange={(e)=>{setDescription(e.target.value)}} value={description} required/>
-            <label>Price</label>
-            <input type="text" onChange={(e)=>{setPrice(e.target.value)}} value={price} required/>
-            <label>Weight</label>
+            <label>Price (lei)</label>
+            <input type="number" onChange={(e)=>{setPrice(e.target.value)}} value={price} required/>
+            <label>Weight (g)</label>
             <input type="text" onChange={(e)=>{setWeight(e.target.value)}} value={weight} required/>
 
             <MenuItemFormSubmitBtn value="Upload"/>
