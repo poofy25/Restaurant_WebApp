@@ -55,6 +55,9 @@
 .deleteBtn {
     border: 1px solid red;
 }
+.deleteBtn:disabled{
+    opacity: 0.5;
+}
 .deleteBtn:hover {
     background-color: red;
 }

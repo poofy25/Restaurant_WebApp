@@ -55,7 +55,7 @@ export default function MenuItemForm () {
         console.log(res)
         
         if(res?.photoUrl && res?.photoId) {
-            alert("Photo uploaded successfully to cloudinary!")
+            console.log("Photo uploaded successfully to cloudinary!")
             const newFormData = new FormData()
 
             newFormData.append('imageUrl' , res?.photoUrl)
