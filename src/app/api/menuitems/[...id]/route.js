@@ -44,3 +44,20 @@ export const DELETE = async (request) => {
         return new NextResponse(JSON.stringify(error))
     }
 }
+
+export const PUT = async (request, {params}) => {
+    try{
+        await connectToDB()
+        const data = await request.json()
+        const id = params.id[0]
+        const result =  await MenuItem.updateOne( { _id: id } , {
+                            $set:data
+                        })
+
+        console.log(result)
+        return new NextResponse(JSON.stringify(result))
+        
+    } catch (error) {
+        return new NextResponse(error)
+    }
+}

@@ -10,7 +10,7 @@ export default function MenuItem ( {data} ) {
     console.log(data)
     return (
         <div className={styles.item}>
-            <Image src={data.imageUrl} width="500" height="300"/>
+            <Image src={data.imageUrl} width="500" height="300" alt='Item Image'/>
             <div className={styles.info}>
                 <h3 className={styles.name}>{data.name}</h3>
                 <button><Image src={infoSVG} width="24" height="24"/></button>
