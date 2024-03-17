@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Truculenta } from "next/font/google";
 import "./globals.css";
+import { CartContextProvider } from "@/context/CartContext"
 
 const truculenta = Truculenta({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={truculenta.className}>{children}</body>
+      <CartContextProvider>
+        <body className={truculenta.className}>{children}</body>
+      </CartContextProvider>
     </html>
   );
 }
