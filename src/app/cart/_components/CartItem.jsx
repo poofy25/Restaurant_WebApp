@@ -14,14 +14,25 @@ export default function CartItem ({item , dispatch}) {
 
     return(
             <div className={styles.item}>
-                <Image src={item.imageUrl} width="500" height="300" alt='Item Image'/>
-                <h3 className={styles.name}>{item.name}</h3>
-                
-                <h4 className={styles.price}>{item.price} mdl</h4>
-                <div>
-                    <button onClick={handleRemove}>-</button>
-                    <h3>{item.quantity}</h3>
-                    <button onClick={handleAdd} >+</button>
+                <Image src={item.imageUrl} width="300" height='200' alt='Item Image'/>
+                <div className={styles.info}>
+                    <h1 className={styles.name}>{item.name}</h1>
+                    <h3 className={styles.name}>{item.description}</h3>
+                    
+                    <div className={styles.price}>
+                    
+                    {item.quantity > 1 
+                    ?
+                    <><h3>{item.price * item.quantity + " mdl"}</h3>&nbsp; | &nbsp;<h4 style={{opacity:"0.75" , fontWeight:"500"}}>{item.price + " mdl"}</h4></>
+                    : 
+                    <h3>{item.price + " mdl"}</h3>
+                    }
+                    </div>
+                    <div className={styles.incrementBtns}>
+                        <button onClick={handleRemove}>-</button>
+                        <h3>{item.quantity}</h3>
+                        <button onClick={handleAdd} >+</button>
+                    </div>
                 </div>
             </div>
     )
