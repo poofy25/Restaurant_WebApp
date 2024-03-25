@@ -4,14 +4,21 @@ import { useEffect , useState } from 'react';
 import { socket } from '@/utils/socket'
 import { getPlacedOrders } from '@/app/actions/OrdersActions'
 
+import { useWithSound } from '@/hooks/useWithSound'
+
+import orderSound from '/public/sounds/orderSound.mp3'
+
 export default function OrdersPage () {
     
   const [orders , setOrders] = useState([])
   const [connection , setConnection] = useState(false)
+  const { playSound } = useWithSound(orderSound)
+
+
 
   // Handle Socket.io connection
   useEffect(() => {
-
+    console.log("use effect running")
     async function setInitialOrders () {
       const initialOrders = await getPlacedOrders()
       if(initialOrders.ok) setOrders(initialOrders.data) 
@@ -26,6 +33,7 @@ export default function OrdersPage () {
     socket.on("placedOrderServer" , (data)=>{
       console.log("ORDER HAS BEEN PLACED: " ,data)
       setOrders(current=>([...current , data]))
+      playSound()
     })
         
     return () => {
