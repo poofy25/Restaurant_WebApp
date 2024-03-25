@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { useReducer } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { processCartItems , checkForIndex }from "@/utils/processCartItems";
+import { checkForIndex }from "@/utils/cartUtils";
 
 
 export const CartContext = createContext()
