@@ -7,6 +7,7 @@ import { getPlacedOrders } from '@/app/actions/OrdersActions'
 export default function OrdersPage () {
     
   const [orders , setOrders] = useState([])
+  const [connection , setConnection] = useState(false)
 
   // Handle Socket.io connection
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function OrdersPage () {
     socket.connect()
     socket.on("connect", () => {
       console.log('Connected to Socket.io server');
+      if(!connection) setConnection(true)
     });
     socket.on("placedOrderServer" , (data)=>{
       console.log("ORDER HAS BEEN PLACED: " ,data)
@@ -38,6 +40,7 @@ export default function OrdersPage () {
     return (
         <main>
             <h2>Orders Page</h2>
+            <h2>{connection ? "Connected to the server !" : "Connecting to the server ..."}</h2>
         </main>
     )
 }
