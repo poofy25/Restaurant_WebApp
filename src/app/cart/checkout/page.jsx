@@ -50,7 +50,6 @@ export default function CheckoutPage () {
             payment:payment,
             items:items
         }
-        console.log(formData)
         const response = await handleCheckout(formData)
         if(response){
             socket.emit('placedOrderClient', response.data);
