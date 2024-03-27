@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {
@@ -14,3 +16,8 @@ button , p , h1, h2, h3, h4, h5 {
   font-family: '__Truculenta_dbcab8', '__Truculenta_Fallback_dbcab8';
 
 }
+button {
+  @apply bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 cursor-pointer border-none text-base ;
+}
+
+

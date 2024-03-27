@@ -6,7 +6,7 @@ import styles from './page.module.scss'
 import { useCartContext } from '@/hooks/useCartContext'
 import { useEffect, useState , useRef} from 'react'
 import { handleCheckout } from '@/app/actions/CheckoutActions'
-import { calculatePrice } from '@/utils/cartUtils'
+import { calculatePrice , calculateItems } from '@/utils/cartUtils'
 
 import { socket } from '@/utils/socket'
 
@@ -47,6 +47,7 @@ export default function CheckoutPage () {
             info:info,
             totalPrice:calculatePrice(items).total,
             deliveryPrice:calculatePrice(items).delivery,
+            totalItems:calculateItems(items),
             payment:payment,
             items:items
         }
