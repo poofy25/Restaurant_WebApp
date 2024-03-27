@@ -69,6 +69,14 @@ const PlacedOrderSchema = new Schema({
         }],
         required:true
     },
+    totalItems:{
+        type:Number,
+        required:true
+    },
+    payment:{
+        type:String,
+        required:true
+    },
     status:{
         type:String,
         required:true
