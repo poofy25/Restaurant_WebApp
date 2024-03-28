@@ -3,22 +3,23 @@
 
 import { useState , useEffect} from "react"
 import { getDeniedOrders } from '@/app/actions/OrdersActions'
-import PlacedOrder from './PlacedOrder';
+import PlacedOrder from './_components/PlacedOrder';
 
 
 export default function DeniedOrdersPage () {
 
     const [orders , setOrders] = useState([])
 
+    // Get denied orders from database
+    const getOrdersFromDb = async () => {
+        const response = await getDeniedOrders()
+        if(response.ok) setOrders(response.data) 
+    }
+
     useEffect(() => {
 
-        // Get pending orders from database
-        async function setInitialOrders () {
-        const initialOrders = await getDeniedOrders()
-        console.log(initialOrders)
-        if(initialOrders.ok) setOrders(initialOrders.data) 
-        }
-        setInitialOrders()
+        // Get denied orders from database
+        getOrdersFromDb()
 
     }, []);
 
@@ -28,7 +29,7 @@ export default function DeniedOrdersPage () {
                 {orders.length === 0 ? <h2>No denied orders!</h2> : 
                     orders.reverse().map((order , index) => {
                         return (
-                        <PlacedOrder data={order} key={index}/>
+                        <PlacedOrder data={order} key={index} getOrdersFromDb={getOrdersFromDb}/>
                         )
                     })
                 }   

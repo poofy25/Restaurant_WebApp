@@ -58,6 +58,7 @@ export async function uploadPhoto (formData) {
 
         // Delete photo files from temp folder after successful upload
         newFiles.map(file => fs.unlink(file.filepath))
+        revalidatePath('/')
 
         return { photoUrl : photoUrl , photoId : photoId}
 

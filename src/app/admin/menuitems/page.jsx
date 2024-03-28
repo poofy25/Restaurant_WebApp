@@ -3,7 +3,7 @@
 import MenuItemAdmin from "../_components/MenuItemAdmin/MenuItemAdmin"
 
 async function GetMenuItems () {
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 60 } } )
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 0 } } )
     return await response.json()
 }
 
