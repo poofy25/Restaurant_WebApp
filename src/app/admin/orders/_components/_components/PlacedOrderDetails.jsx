@@ -5,7 +5,7 @@ import styles from "./placeOrderDetails.module.scss"
 import { format } from "date-fns"
 import Image from "next/image"
 
-import { confirmOrder } from "@/app/actions/OrdersActions"
+import { confirmOrder , denyOrder } from "@/app/actions/OrdersActions"
 
 import { useRouter } from "next/navigation"
 
@@ -13,8 +13,14 @@ export default function PlacedOrderDetails ( {data , open , setOpen} ) {
 
     const router = useRouter()
     const handleConfirm = async () => {
-        console.log("STATUS PENDING")
+        console.log("STATUS Changing status")
         const response = await confirmOrder(data)
+        console.log(response)
+        if(response.ok) router.refresh()
+    } 
+    const handleDeny = async () => {
+        console.log("Changing status")
+        const response = await denyOrder(data)
         console.log(response)
         if(response.ok) router.refresh()
     }
@@ -25,7 +31,8 @@ export default function PlacedOrderDetails ( {data , open , setOpen} ) {
         <div className={`${styles.container} ${open ? styles.open : ''}`} onClick={(e)=>{if(e.target == e.currentTarget)setOpen(false)}}>
             <div className={styles.dataContainer}>
                 <button onClick={()=>setOpen(false)}>X</button> 
-
+                <div><p>Status:</p> <h3>{data.status}</h3></div>                                         
+                
                 <h2>Personal Info</h2>
                 <div><p>Name:</p> <h3>{data.name}</h3></div>                                         
                 <div><p>Phone:</p> <a>{data.phone}</a></div>                                         
@@ -67,7 +74,7 @@ export default function PlacedOrderDetails ( {data , open , setOpen} ) {
                     <a href={`tel:${data.phone}`} className="flex items-center justify-center bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 text-s cursor-pointer w-full box-border">Call number</a>
                     <div className="gap-2">
                         <button onClick={handleConfirm} className="bg-green-600 hover:bg-green-900 mr-2 px-10">Confirm</button>
-                        <button className="bg-red-600 hover:bg-red-900">X</button>
+                        <button onClick={handleDeny} className="bg-red-600 hover:bg-red-900">X</button>
                     </div>
                 </div>
             </div>
