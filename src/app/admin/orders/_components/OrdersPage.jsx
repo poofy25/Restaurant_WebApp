@@ -1,22 +1,19 @@
 'use client'
 import { useEffect , useState } from 'react';
 
-import NewOrdersPage from './_components/NewOrdersPage'
-import PendingOrdersPage from './_components/PendingOrdersPage'
-import CompletedOrdersPage from './_components/CompletedOrdersPage'
-import DeniedOrdersPage from './_components/DeniedOrdersPage'
+import NewOrdersPage from './NewOrdersPage'
+import PendingOrdersPage from './PendingOrdersPage'
+import CompletedOrdersPage from './CompletedOrdersPage'
+import DeniedOrdersPage from './DeniedOrdersPage'
 
 export default function OrdersPage () {
   
   const [page , setPage] = useState(null)
   
+  // Changes current page based on button click
   const handleChangePage = (pageName) => {
     if(page !== pageName)setPage(pageName)
   }
-
-  useEffect(()=>{
-    console.log(page)
-  },[page])
     
     return (
         <main className='flex flex-col gap-2'>

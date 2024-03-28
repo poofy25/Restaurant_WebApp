@@ -13,14 +13,14 @@
     box-sizing: border-box;
 }
 .dataContainer{
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: gray;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 1rem;
 }
 .dataContainer > div {
     display: flex;
-    align-items: center;
 }
 

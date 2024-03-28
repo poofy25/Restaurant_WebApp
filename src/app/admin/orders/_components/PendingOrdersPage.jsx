@@ -3,22 +3,23 @@
 
 import { useState , useEffect} from "react"
 import { getPendingOrders } from '@/app/actions/OrdersActions'
-import PlacedOrder from './PlacedOrder';
+import PlacedOrder from './_components/PlacedOrder';
 
 
 export default function PendingOrdersPage () {
 
     const [orders , setOrders] = useState([])
 
+    // Get pending orders from database
+    const getOrdersFromDb = async () => {
+        const initialOrders = await getPendingOrders()
+        if(initialOrders.ok) setOrders(initialOrders.data) 
+    }
+
     useEffect(() => {
 
         // Get pending orders from database
-        async function setInitialOrders () {
-        const initialOrders = await getPendingOrders()
-        console.log(initialOrders)
-        if(initialOrders.ok) setOrders(initialOrders.data) 
-        }
-        setInitialOrders()
+        getOrdersFromDb()
 
     }, []);
 
@@ -28,7 +29,7 @@ export default function PendingOrdersPage () {
                 {orders.length === 0 ? <h2>No pending orders!</h2> : 
                     orders.reverse().map((order , index) => {
                         return (
-                        <PlacedOrder data={order} key={index}/>
+                        <PlacedOrder data={order} key={index} getOrdersFromDb={getOrdersFromDb}/>
                         )
                     })
                 }   

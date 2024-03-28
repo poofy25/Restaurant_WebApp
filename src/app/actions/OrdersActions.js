@@ -66,13 +66,29 @@ export async function confirmOrder (order) {
         })
 
         console.log(result)
-        revalidatePath("/admin/orders")
         return {ok:true , data:JSON.parse(JSON.stringify(result))}
     } catch (error) {
         console.error(error); // Log the error for debugging
         return { error: error.message || 'An error occurred during confirming order' }; // Return an error object with message
     }
 }
+
+export async function completeOrder (order) {
+    try {
+        await connectToDB()
+
+        const result = await PlacedOrder.updateOne( { _id: order._id } , {
+            status:"completed"
+        })
+
+        console.log(result)
+        return {ok:true , data:JSON.parse(JSON.stringify(result))}
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        return { error: error.message || 'An error occurred during completing order' }; // Return an error object with message
+    }
+}
+
 export async function denyOrder (order) {
     try {
         await connectToDB()
@@ -82,10 +98,9 @@ export async function denyOrder (order) {
         })
 
         console.log(result)
-        revalidatePath("/admin/orders")
         return {ok:true , data:JSON.parse(JSON.stringify(result))}
     } catch (error) {
         console.error(error); // Log the error for debugging
-        return { error: error.message || 'An error occurred during confirming order' }; // Return an error object with message
+        return { error: error.message || 'An error occurred during denying order' }; // Return an error object with message
     }
 }
