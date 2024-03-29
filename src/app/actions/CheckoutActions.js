@@ -14,5 +14,5 @@ export async function handleCheckout (formData) {
     } catch (error) {
         console.error(error); // Log the error for debugging
         return { error: error.message || 'An error occurred during checkout.' }; // Return an error object with message
-      }
+    }
 }

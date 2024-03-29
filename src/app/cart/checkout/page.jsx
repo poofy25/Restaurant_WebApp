@@ -12,7 +12,11 @@ import { socket } from '@/utils/socket'
 
 export default function CheckoutPage () {
 
-    const {items , dispatch} = useCartContext()
+
+    const [loading , setLoading] = useState(null)
+    const [formMessage , setFormMessage] = useState(null)
+
+    const { items } = useCartContext()
 
     const [name , setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -34,6 +38,10 @@ export default function CheckoutPage () {
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
+        setLoading(true)
+        setFormMessage(null)
+
+        // Set form data as an object from inputs
         const formData = {
             name:name,
             phone:phone,
@@ -51,11 +59,19 @@ export default function CheckoutPage () {
             payment:payment,
             items:items
         }
+        // Post order in database
         const response = await handleCheckout(formData)
-        if(response){
+
+        // Send event to the server that an order has been set
+        if(response.ok){
             socket.emit('placedOrderClient', response.data);
+            setFormMessage("Order sent successfuly")
             console.log(response)
-        }
+        } else {
+            setFormMessage(response)
+        } 
+
+        setLoading(false)
     }
 
     useEffect(()=>{
@@ -124,7 +140,12 @@ export default function CheckoutPage () {
                         <input type="radio" id="payment2" name="payment" value="Card at delivery" onClick={(e)=>{setPayment(e.target.value)}}/>
                     </div>
                 </form>
-                <button onClick={()=>{formRef.current.requestSubmit()}}>Order</button>
+                <button onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Sending order..." : "Order"}</button>
+                {formMessage && 
+                    <div>
+                        <p>{...formMessage}</p>
+                    </div>
+                }
             </div>
             
         </main>
