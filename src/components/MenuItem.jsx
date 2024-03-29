@@ -21,7 +21,7 @@ export default function MenuItem ( {data} ) {
 
     return (
         <div className={styles.item}>
-            <Image src={data.imageUrl} width="300" height="500" alt='Item Image'/>
+            <Image src={data.imageUrl} width="300" height="400" alt='Item Image' loading='lazy'/>
             <div className={styles.info}>
                 <h3 className={styles.name}>{data.name}</h3>
                 <button><Image src={infoSVG} width="24" height="24" alt='Info Icon'/></button>
