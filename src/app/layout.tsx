@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Truculenta } from "next/font/google";
 import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext"
+import NavBar from '@/components/Navbar/NavBar'
 
 const truculenta = Truculenta({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <CartContextProvider>
-        <body className={truculenta.className}>{children}</body>
+        <body className={truculenta.className}>
+          <NavBar/>
+          {children}
+        </body>
       </CartContextProvider>
     </html>
   );

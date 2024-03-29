@@ -140,7 +140,7 @@ export default function CheckoutPage () {
                         <input type="radio" id="payment2" name="payment" value="Card at delivery" onClick={(e)=>{setPayment(e.target.value)}}/>
                     </div>
                 </form>
-                <button onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Sending order..." : "Order"}</button>
+                <button disabled={loading} onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Sending order..." : "Order"}</button>
                 {formMessage && 
                     <div>
                         <p>{...formMessage}</p>
