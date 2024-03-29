@@ -27,7 +27,7 @@ export default function PlacedOrder ( {data , getOrdersFromDb:updateData} ) {
 
     return (
         <>
-        <div className={`border-green-500 border-2 border-solid px-2 py-2 box-border  w-[250px] ${data.status === 'pending' && 'border-yellow-600' || data.status === 'denied' && 'border-red-600' || data.status === 'completed' && 'border-gray-600' }`}>
+        <div className={`border-green-500 border-2 border-solid px-2 py-2 box-border  w-[250px] ${data.status === 'pending' && 'border-yellow-600' || data.status === 'denied' && 'border-red-600' || data.status === 'completed' && '!border-gray-600' }`}>
             <h3>{data.name}</h3>
             <a href={`tel:${data.phone}`}>{data.phone}</a>
             <p>{data.street}</p>
