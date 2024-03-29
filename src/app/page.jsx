@@ -4,7 +4,8 @@ import MenuItem from "@/components/MenuItem"
 
 async function GetMenuItems () {
   const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 300 } } )
-  return await response.json()
+  const responseJson = await response.json()
+  return responseJson
 }
 
 export default async function Home() {

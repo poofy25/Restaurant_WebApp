@@ -19,8 +19,19 @@ export default function NavBar () {
         flex flex-row items-center w-full h-[80px] bg-[rgba(0,0,0,0.5)] overflow-hidden px-[7.5vw]
         relative justify-between box-border
         ">
+
+            {/* Hamburger button */}
+            <div className="relative h-full flex flex-col justify-center items-center sm:hidden ">
+                <button className="relative w-[32px] h-[24px] p-0 bg-transparent hover:bg-transparent">
+                    <div className="w-full h-[2px] absolute top-0 left-0 bg-white rounded"></div>
+                    <div className="w-full h-[2px] absolute left-0 bg-white rounded"></div>
+                    <div className="w-full h-[2px] absolute bottom-0 left-0 bg-white rounded"></div>
+                </button>
+            </div>
+
+
             {/* Logo */}
-            <div className="relative h-full flex flex-col justify-center items-center">
+            <div className="relative h-full flex flex-col justify-center items-center ml-auto mr-auto">
                 <Link href='/' className="relative aspect-square h-[100%] flex invert">
                     <Image layout='fill' objectFit='contain' src={LogoPlaceHolder}/>
                 </Link>
