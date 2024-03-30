@@ -1,4 +1,5 @@
 'use client'
+import styles from './navBar.module.scss'
 
 import { useState } from "react"
 
@@ -11,18 +12,27 @@ import NoImage from '/public/imgs/no-image.jpg'
 import LogoPlaceHolder from '/public/imgs/logo_placeholder.png'
 import CartSvg from '/public/svgs/cart.svg'
 
+import NavBarMenu from './NavBarMenu'
+
 export default function NavBar () {
 
     const {items , dispatch} = useCartContext()
+    const [isMenuOpen , setIsMenuOpen] = useState(false)
+
+
     return (
         <nav className="
         flex flex-row items-center w-full h-[80px] bg-[rgba(0,0,0,0.5)] overflow-hidden px-[7.5vw]
         relative justify-between box-border
         ">
 
+
+            {/* Navbar menu */}
+            <NavBarMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
             {/* Hamburger button */}
             <div className="relative h-full flex flex-col justify-center items-center sm:hidden ">
-                <button className="relative w-[32px] h-[24px] p-0 bg-transparent hover:bg-transparent">
+                <button onClick={()=>setIsMenuOpen(current=>!current)}
+                className="relative w-[32px] h-[24px] p-0 bg-transparent hover:bg-transparent">
                     <div className="w-full h-[2px] absolute top-0 left-0 bg-white rounded"></div>
                     <div className="w-full h-[2px] absolute left-0 bg-white rounded"></div>
                     <div className="w-full h-[2px] absolute bottom-0 left-0 bg-white rounded"></div>
@@ -31,7 +41,7 @@ export default function NavBar () {
 
 
             {/* Logo */}
-            <div className="relative h-full flex flex-col justify-center items-center ml-auto mr-auto">
+            <div className="relative h-full flex flex-col justify-center items-center">
                 <Link href='/' className="relative aspect-square h-[100%] flex invert">
                     <Image layout='fill' objectFit='contain' src={LogoPlaceHolder}/>
                 </Link>

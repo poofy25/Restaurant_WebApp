@@ -9,7 +9,15 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        'primary':{
+          DEFAULT : '#1b1a1b',
+          light: 'rgb(37, 36, 37)',
+          lighter: 'rgb(57, 56, 57)'
+        }
+      },
+    },
   },
   corePlugins: {
     preflight: false,

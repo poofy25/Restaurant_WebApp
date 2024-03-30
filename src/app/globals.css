@@ -12,6 +12,9 @@ body {
   background-color: #1b1a1b;
   color: white;
 }
+:root:has(.no-doc-scroll) {
+  overflow:hidden;
+}
 
 button , p , h1, h2, h3, h4, h5 {
   margin: 0;
