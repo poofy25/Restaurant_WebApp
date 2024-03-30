@@ -26,17 +26,23 @@ export default function MenuItem ( {data} ) {
 
     return (
         <div className='
-            relative w-[clamp(175px,20vw,250px)] flex flex-col overflow-hidden items-center
-            p-4 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
-          hover:border-yellow-300
+            w-[clamp(100px,32vw,200px)] 
+            relative flex flex-col overflow-hidden items-center
+            p-2 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
+            sm:w-[clamp(175px,20vw,250px)] sm:p-4
+          sm:hover:border-yellow-300
         '>
             {/* Item Image */}
-            <Image src={data.imageUrl} width="350" height="500" alt='Item Image' loading='lazy'
-            className='aspect-[10/14] flex-1 w-full object-cover rounded-lg cursor-pointer'
-            />
+            <div className='w-full flex flex-col relative cursor-pointer'>
+                <Image src={data.imageUrl} width="350" height="500" alt='Item Image' loading='lazy'
+                className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover rounded-lg '
+                />
+                <p className='sm:hidden absolute left-2 bottom-2 z-10'>{data.name}</p>
+                <div className='sm:hidden absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
+            </div>
 
             {/* Item name */}
-            <div className='w-full flex justify-between items-center p-2 box-border'>
+            <div className='hidden sm:flex w-full justify-between items-center p-2 box-border'>
                 <h3 className='truncate'>{data.name}</h3>
                 <button
                 className='bg-transparent invert border-0 cursor-pointer p-0 flex justify-center items-center'
@@ -59,11 +65,12 @@ export default function MenuItem ( {data} ) {
                     // Display message on add the cart
                     <>
                         <h4 className=''>{data.price} mdl</h4>
-                        <p className='ml-auto mr-2'>În coș</p>
+                        <p className='hidden sm:flex ml-auto mr-2'>În coș</p>
                         <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
                     </> : 
                     <>
-                        <p className='self-center '>Adaugat în coș!</p>
+                        <p className='hidden sm:flex self-center'>Adaugat în coș!</p>
+                        <p className='flex sm:hidden self-center'>În coș!</p>
                         <Image src={toCartSVG} width="24" height="24" alt='Cart Icon' className='!invert-0'/>
                     </>
                 } 
