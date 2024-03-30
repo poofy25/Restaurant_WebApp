@@ -49,21 +49,24 @@ export default function MenuItem ( {data} ) {
                 border border-yellow-300 border-solid rounded-lg
                 hover:bg-yellow-300 hover:text-black
                 ${styles.toCartBtn}
-                ${addedToCart && 'bg-yellow-300 text-black'} `} 
+                ${addedToCart && 'bg-yellow-300 text-black'} 
+                `} 
                 onClick={handleCartBtn}
                 disabled={addedToCart}
             >
+
                 {!addedToCart ? 
-                // Display message on add the cart
-                <>
-                    <h4 className=''>{data.price} mdl</h4>
-                    <p className='ml-auto mr-2'>În coș</p>
-                    <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
-                </> : 
-                <>
-                    <p className='self-center'>Adaugat în coș!</p>
-                    <Image src={toCartSVG} width="24" height="24" alt='Cart Icon' className='!invert-0'/>
-                </>} 
+                    // Display message on add the cart
+                    <>
+                        <h4 className=''>{data.price} mdl</h4>
+                        <p className='ml-auto mr-2'>În coș</p>
+                        <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
+                    </> : 
+                    <>
+                        <p className='self-center text-black'>Adaugat în coș!</p>
+                        <Image src={toCartSVG} width="24" height="24" alt='Cart Icon' className='!invert-0'/>
+                    </>
+                } 
 
             </button>
             
