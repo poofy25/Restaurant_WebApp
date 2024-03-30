@@ -33,12 +33,12 @@ export default function MenuItem ( {data} ) {
           sm:hover:border-yellow-300
         '>
             {/* Item Image */}
-            <div className='w-full flex flex-col relative cursor-pointer'>
+            <div className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden'>
                 <Image src={data.imageUrl} width="350" height="500" alt='Item Image' loading='lazy'
-                className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover rounded-lg '
+                className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                 />
-                <p className='sm:hidden absolute left-2 bottom-2 z-10'>{data.name}</p>
-                <div className='sm:hidden absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
+                <p className='sm:hidden absolute left-2 bottom-2 z-1'>{data.name}</p>
+                <div className='sm:hidden z-[-1]  absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
             </div>
 
             {/* Item name */}
