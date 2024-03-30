@@ -17,6 +17,9 @@ module.exports = {
           lighter: 'rgb(57, 56, 57)'
         }
       },
+      aspectRatio: {
+        '10/14': '10 / 14',
+      },
     },
   },
   corePlugins: {

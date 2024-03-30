@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import MenuItem from "@/components/MenuItem"
+import MenuItem from "@/components/MenuItem/MenuItem"
 
 async function GetMenuItems () {
   const response = await fetch(`${process.env.WEBSITE_URL}/api/menuitems` , { next: { revalidate: 300 } } )

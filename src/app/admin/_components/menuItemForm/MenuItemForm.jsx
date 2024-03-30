@@ -4,7 +4,7 @@ import styles from './menuItemForm.module.scss'
 import { useState , useRef } from 'react'
 import MenuItemFormPhotoCard from './MenuItemFormPhotoCard'
 import MenuItemFormSubmitBtn from './MenuItemFormSubmitBtn'
-import MenuItem from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem/MenuItem'
 
 import { uploadPhoto } from '@/app/actions/MenuItemFormActions'
 

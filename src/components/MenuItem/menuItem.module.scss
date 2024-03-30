@@ -1,0 +1,9 @@
+.toCartBtn > img {
+    @apply invert transition-all
+
+}
+.toCartBtn:hover > img{
+    @apply invert-0
+
+}
+
