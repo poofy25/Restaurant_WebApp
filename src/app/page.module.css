@@ -1,5 +1,7 @@
 .main{
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
+  padding-inline: 7.5vw;
+  gap: 3vw;
 }

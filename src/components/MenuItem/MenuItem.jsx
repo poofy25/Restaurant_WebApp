@@ -35,9 +35,9 @@ export default function MenuItem ( {data} ) {
     return (
         <>
             <div className='
-                w-[clamp(100px,32vw,200px)] 
+                w-[clamp(100px,41vw,200px)] 
                 relative flex flex-col overflow-hidden items-center
-                p-2 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
+                box-border border rounded-lg gap-2 transition-all border-solid border-transparent
                 sm:w-[clamp(175px,20vw,250px)] sm:p-4
             sm:hover:border-yellow-300
             '>
@@ -47,7 +47,7 @@ export default function MenuItem ( {data} ) {
                     <Image src={data.imageUrl} width="350" height="500" alt='Item Image' loading='lazy'
                     className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                     />
-                    <p className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</p>
+                    <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</h3>
                     <div className='sm:hidden z-[-1]  absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
                 </div>
 

@@ -31,7 +31,7 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
     
 
     return (
-        <div className='fixed top-0 left-0 w-full h-full z-20 bg-primary no-doc-scroll p-4 box-border flex flex-col items-center gap-4'>
+        <div className='fixed top-0 left-0 w-full h-full z-20 bg-primary no-doc-scroll px-[7.5vw] py-[1rem] box-border flex flex-col items-center gap-4'>
             {/* Item Image */}
             <button onClick={handleCloseInfo}
             className='w-full rounded-lg bg-red-600'
