@@ -38,7 +38,7 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
             >Închide</button>
 
             <div className='w-full flex flex-col relative z-[1] rounded-lg overflow-hidden'>
-                <Image src={data.imageUrl} width="350" height="500" alt='Item Image' loading='lazy'
+                <Image src={data.imageUrl} width="500" height="500" alt='Item Image' loading='lazy'
                 className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                 />
             </div>
@@ -61,7 +61,7 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
             
             {/* To cart button */}
             <button className={`
-                w-full flex justify-between items-center bg-transparent p-2 py-4 cursor-pointer transition-all box-border
+                w-full flex justify-between items-center bg-transparent p-4 cursor-pointer transition-all box-border
                 border border-yellow-300 border-solid rounded-lg
                 bg-yellow-300 text-black
                 hover:bg-yellow-300

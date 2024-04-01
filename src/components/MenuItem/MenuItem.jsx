@@ -31,14 +31,15 @@ export default function MenuItem ( {data} ) {
         setIsOpenInfo(true)
     }
     
+    // w-[clamp(100px,41vw,200px)] 
 
     return (
         <>
             <div className='
-                w-[clamp(100px,41vw,200px)] 
+                w-[calc(50%-0.5rem)]
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
-                sm:w-[clamp(175px,20vw,250px)] sm:p-4
+                sm:w-[calc(20%)] sm:p-4
             sm:hover:border-yellow-300
             '>
                 {/* Item Image */}

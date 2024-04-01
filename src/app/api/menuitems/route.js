@@ -5,6 +5,8 @@ import MenuItem from "../../../models/MenuItem";
 
 export const GET = async () => {
     try{
+
+       
         await connectToDB()
 
         const menuItems = await MenuItem.find({}).sort({ createdAt: -1 });
