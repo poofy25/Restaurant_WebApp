@@ -29,3 +29,6 @@ a {
   @apply no-underline text-slate-100 hover:text-yellow-300
 }
 
+h2 {
+  @apply text-4xl
+}
