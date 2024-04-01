@@ -13,9 +13,13 @@ export default function CartPage () {
     const {items , dispatch} = useCartContext()
 
     return (
-        <main className={styles.main}>
-            <div className={styles.items}>
-                <h2>{`${calculateItems(items)} Article(s) in Cart`}</h2>
+        <main className="flex flex-col gap-4 px-[7.5vw] box-border">
+
+            <div className="flex flex-col w-full">
+
+                <h2 className='text-3xl pb-2 mb-2 border-0 border-b-yellow-300 border-b border-solid'>{`${calculateItems(items)} Article(s) in Cart`}</h2>
+
+
                 {[...items].reverse().map((item,index) => {
                     return (
                         <CartItem item={item} key={index} dispatch={dispatch}/>

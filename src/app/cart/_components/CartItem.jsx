@@ -13,12 +13,19 @@ export default function CartItem ({item , dispatch}) {
     }
 
     return(
-            <div className={styles.item}>
-                <Image src={item.imageUrl} width="300" height='200' alt='Item Image'/>
-                <div className={styles.info}>
-                    <h1 className={styles.name}>{item.name}</h1>
-                    <h3 className={styles.name}>{item.description}</h3>
-                    
+            <div className="flex w-full box-border items-stretch gap-4 py-2
+            border-0 border-b-primary-lighter border-b-2 border-solid h-auto relative
+            ">
+                <div className='w-[40%] h-full rounded-lg overflow-hidden'>
+                    <div className='relative w-full aspect-square'>
+                        <Image
+                        src={item.imageUrl} fill={true} alt='Item Image'/>
+                        
+                    </div>
+                </div>
+                <div className="flex-1 flex flex-col items-start gap-1">
+                    <h2 className="text-2xl">{item.name}</h2>
+                    <button className='p-0 bg-transparent underline font-normal text-yellow-300 hover:bg-transparent'>Vezi detalii</button>                    
                     <div className={styles.price}>
                     
                     {item.quantity > 1 
