@@ -45,7 +45,7 @@ export default function MenuItem ( {data} ) {
                 {/* Item Image */}
                 <div onClick={handleOpenInfo}
                 className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden'>
-                    <Image src={data.imageUrl} width="300" height="384" alt='Item Image' loading='lazy'
+                    <Image src={data.imageUrl} width="75" height="75" alt='Item Image' priority={true}
                     className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                     />
                     <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</h3>
