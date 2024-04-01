@@ -36,18 +36,18 @@ export default function MenuItem ( {data} ) {
     return (
         <>
             <div className='
-                w-[calc(50%-0.5rem)]
+                w-[50%] p-2
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
                 sm:w-[calc(20%)] sm:p-4
-            sm:hover:border-yellow-300
+            hover:border-yellow-300
             '>
                 {/* Item Image */}
                 <div onClick={handleOpenInfo}
                 className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden aspect-square sm:aspect-[10/14]'>
                     <Image src={data.imageUrl} fill={true} alt='Item Image' priority={true}
                     sizes="(max-width: 640px) 20vw, (max-width: 1200px) 20vw, 20vw"
-                    className='aspect-square sm:aspect-[10/14] flex-1 w-full z-[-1] '
+                    className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                     />
                     <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</h3>
                     <div className='sm:hidden z-[-1]  absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
