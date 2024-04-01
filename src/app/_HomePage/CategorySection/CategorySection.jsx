@@ -23,8 +23,6 @@ export default function HomeCategorySection ({section}) {
         getData()
     },[])
 
-    console.log("CATEGORY DATAL: " , data)
-    if(data.length > 0) {
         return (
             <div className="flex flex-col w-full gap-4">
                 {/* Header */}
@@ -34,10 +32,10 @@ export default function HomeCategorySection ({section}) {
                 </div>
 
 
-
+                {/* Items */}
                 <div className="flex flex-wrap gap-4 sm:gap-0">
 
-                    {data.length > 0 && 
+                    { 
                         data.map((data, index)=>{
                             return(
                                 <MenuItem data={data} key={index}/>
@@ -48,8 +46,6 @@ export default function HomeCategorySection ({section}) {
                 </div>
             </div>
         )
-    } else {
-        return ('')
-    }
+
         
 }
