@@ -3,7 +3,7 @@
 import styles from './cartItem.module.scss'
 import Image from 'next/image'
 
-export default function CartItem ({item , dispatch}) {
+export default function CartItem ({item , dispatch , isLastOne}) {
 
     const handleRemove = () => {
         dispatch({type: 'REMOVE_ITEM', payload: item})
@@ -13,17 +13,17 @@ export default function CartItem ({item , dispatch}) {
     }
 
     return(
-            <div className="flex w-full box-border items-stretch gap-4 py-2
-            border-0 border-b-primary-lighter border-b-2 border-solid h-auto relative
-            ">
-                <div className='w-[40%] h-full rounded-lg overflow-hidden'>
-                    <div className='relative w-full aspect-square'>
-                        <Image
+            <div className={`flex w-full box-border items-stretch gap-4 py-4
+            ${isLastOne ? "!border-0" : "border-0"} border-b-primary-lighter border-b-2 border-solid h-full relative
+            `}>
+                    <div className='relative w-[40%] flex-1 rounded-lg overflow-hidden
+                    sm:max-w-[150px] shadow-xl
+                    '>
+                        <Image className='object-cover'
                         src={item.imageUrl} fill={true} alt='Item Image'/>
-                        
                     </div>
-                </div>
-                <div className="flex-1 flex flex-col items-start gap-1">
+
+                <div className="w-[60%] flex flex-col items-start gap-1">
                     <h2 className="text-2xl">{item.name}</h2>
                     <button className='p-0 bg-transparent underline font-normal text-yellow-300 hover:bg-transparent'>Vezi detalii</button>                    
                     <div className={styles.price}>
@@ -35,10 +35,15 @@ export default function CartItem ({item , dispatch}) {
                     <h3>{item.price + " mdl"}</h3>
                     }
                     </div>
-                    <div className={styles.incrementBtns}>
-                        <button onClick={handleRemove}>-</button>
-                        <h3>{item.quantity}</h3>
-                        <button onClick={handleAdd} >+</button>
+                    <div className={`${styles.incrementContainer} 
+                    shadow
+                    border border-primary-lighter border-solid overflow-hidden
+                    flex justify-center items-center w-fit rounded`}>
+                        <button className='hover:bg-primary-lighter'
+                        onClick={handleRemove}>-</button>
+                        <h3 className='border-0 border-r border-r-primary-lighter border-l border-l-primary-lighter border-solid'>{item.quantity}</h3>
+                        <button className='hover:bg-primary-lighter' 
+                        onClick={handleAdd} >+</button>
                     </div>
                 </div>
             </div>

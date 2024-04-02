@@ -35,6 +35,9 @@
     border-radius: 4px;
 
 }
+.incrementContainer > button , .incrementContainer > h3 {
+    @apply bg-primary-light text-2xl w-8 h-8 aspect-square flex items-center justify-center p-0
+}
 .incrementBtns > button , .incrementBtns > h3 {
     background-color: transparent;
     border: none;
