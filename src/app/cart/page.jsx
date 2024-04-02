@@ -35,8 +35,9 @@ export default function CartPage () {
                 })}
             </div>
 
-            {/* Delivery */}
             {calculateItems(items) !== 0 ? <>
+            
+            {/* Delivery */}
                 <div className="flex flex-col py-4 box-border border-0 border-t-2 border-t-yellow-300 border-solid
                 sm:flex-1 sm:border-0 sm:pt-0
                 ">
@@ -54,6 +55,8 @@ export default function CartPage () {
                     href="/cart/checkout">Comandă</Link>
                 </div>
             </> : <>
+
+            {/* Back to home button if no articles are in cart */}
                 <Link
                     className='bg-yellow-300 text-black font-bold text-2xl
                     flex justify-center items-center rounded-lg py-2 mt-4 hover:text-black

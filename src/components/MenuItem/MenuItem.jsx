@@ -39,7 +39,9 @@ export default function MenuItem ( {data} ) {
                 w-[50%] p-2
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
-                sm:w-[calc(20%)] sm:p-4
+                sm:w-[calc(33.33%)]
+                md:w-[calc(25%)]
+                lg:w-[calc(20%)] sm:p-4
             hover:border-yellow-300
             '>
                 {/* Item Image */}
