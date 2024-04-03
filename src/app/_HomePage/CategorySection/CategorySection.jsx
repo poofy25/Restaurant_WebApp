@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { GetMenuItemsCategory } from '@/app/actions/MenuItemsActions' 
 
 import MenuItem from "@/components/MenuItem/MenuItem"
+import CategorySlider from './CategorySlider'
 
 async function getData (section) {
     const response = await GetMenuItemsCategory(section)
@@ -37,12 +38,40 @@ export default async function HomeCategorySection ({section , isPage}) {
                 {/* Items */}
                 <div className="flex flex-wrap">
 
-                    { 
-                        data.map((data, index)=>{
-                            return(
-                                <MenuItem data={data} key={index}/>
-                            )
-                        })
+                    
+                    {!isPage ? 
+
+                        // If the page isnt the category page then render the slider for desktops
+                        <div className='hidden md:block h-full w-full'>
+                            <CategorySlider data={data}/>
+                        </div>
+                        :
+
+                        // If the page is the category page then render the items without the slider
+                        <>
+                            { 
+                                data.map((data, index)=>{
+                                    return(
+                                        <MenuItem data={data} key={index}/>
+                                    )
+                                })
+                            }
+                        </>
+
+                    }
+                    
+                    {!isPage && 
+
+                        // If the page isnt the category page then render the items for mobile
+                        <div className='flex flex-wrap w-full h-full md:hidden '>
+                            { 
+                                data.map((data, index)=>{
+                                    return(
+                                        <MenuItem data={data} key={index}/>
+                                    )
+                                })
+                            }
+                        </div>
                     }
 
                 </div>

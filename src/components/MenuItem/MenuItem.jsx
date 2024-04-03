@@ -11,7 +11,7 @@ import { useState } from 'react'
 
 import MenuItemInfo from './MenuItemInfo/MenuItemInfo'
 
-export default function MenuItem ( {data} ) {
+export default function MenuItem ( {data , isSlider} ) {
 
     const { dispatch } = useCartContext()
 
@@ -35,7 +35,7 @@ export default function MenuItem ( {data} ) {
 
     return (
         <>
-            <div className='
+            <div className={`
                 w-[50%] p-2
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
@@ -43,12 +43,13 @@ export default function MenuItem ( {data} ) {
                 md:w-[calc(25%)]
                 lg:w-[calc(20%)] sm:p-4
             hover:border-yellow-300
-            '>
+            ${isSlider ? 'keen-slider__slide' : ''}
+            `}>
                 {/* Item Image */}
                 <div onClick={handleOpenInfo}
                 className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden aspect-square sm:aspect-[10/14]'>
                     <Image src={data.imageUrl} fill={true} alt='Item Image' priority={true}
-                    sizes="(max-width: 640px) 20vw, (max-width: 1200px) 20vw, 20vw"
+                    sizes="(max-width: 640px) 40vw, (max-width: 764px) 33vw, , (max-width: 1024px) 20vw"
                     className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
                     />
                     <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</h3>
