@@ -44,13 +44,20 @@ export default function CategorySliver ({data}) {
         <div className='relative w-full h-full'>
       <div ref={sliderRef} className="keen-slider relative">
 
-        { 
+        {/* { 
             data.map((data, index)=>{
                 return(
                         <MenuItem isSlider={true} data={data} key={index}/>
                 )
             })
-        } 
+        }  */}
+
+        <div className='h-[200px] bg-blue-300 keen-slider__slide'>1</div>
+        <div className='h-[200px] bg-red-300 keen-slider__slide'>2</div>
+        <div className='h-[200px] bg-yellow-300 keen-slider__slide'>3</div>
+        <div className='h-[200px] bg-green-300 keen-slider__slide'>4</div>
+        <div className='h-[200px] bg-purple-300 keen-slider__slide'>5</div>
+        <div className='h-[200px] bg-gray-300 keen-slider__slide'>6</div>
 
 
       
