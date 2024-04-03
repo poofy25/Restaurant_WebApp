@@ -52,12 +52,13 @@ export default function CategorySliver ({data}) {
             })
         }  */}
 
-        <div className='h-[200px] bg-blue-300 keen-slider__slide'>1</div>
-        <div className='h-[200px] bg-red-300 keen-slider__slide'>2</div>
-        <div className='h-[200px] bg-yellow-300 keen-slider__slide'>3</div>
-        <div className='h-[200px] bg-green-300 keen-slider__slide'>4</div>
-        <div className='h-[200px] bg-purple-300 keen-slider__slide'>5</div>
-        <div className='h-[200px] bg-gray-300 keen-slider__slide'>6</div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-blue-300 h-full'>1</div></div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-red-300 h-full'>2</div></div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-yellow-300 h-full'>3</div></div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-green-300 h-full'>4</div></div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-purple-300-300 h-full'>5</div></div>
+        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-gray-300 h-full'>6</div></div>
+
 
 
       
