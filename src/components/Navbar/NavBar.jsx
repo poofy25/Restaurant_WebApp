@@ -23,7 +23,7 @@ export default function NavBar () {
     return (
         <nav className="
         flex flex-row items-center w-full h-[80px] bg-[rgba(0,0,0,0.5)] overflow-hidden px-[7.5vw]
-        relative justify-between box-border
+        relative justify-between box-border mb-[50vh]
         "
         style={{background: "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(10,10,10,1) 100%)"}}
         >
