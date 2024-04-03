@@ -36,6 +36,7 @@ export default function CategorySliver ({data}) {
               slides: { perView: 5 },
             },
           },
+        renderMode:"performance"
       },
     )
   
