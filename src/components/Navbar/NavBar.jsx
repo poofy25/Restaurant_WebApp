@@ -45,7 +45,7 @@ export default function NavBar () {
             {/* Logo */}
             <div className="relative h-full flex flex-col justify-center items-center">
                 <Link href='/' className="relative aspect-square h-[100%] flex invert">
-                    <Image layout='fill' objectFit='contain' src={LogoPlaceHolder}/>
+                    <Image layout='fill' objectFit='contain' src={LogoPlaceHolder} priority={true}/>
                 </Link>
             </div>
 
@@ -72,7 +72,7 @@ export default function NavBar () {
                     className="absolute w-[20px] h-[20px] bg-red-600 invert rounded-full right-[-6px] top-[-6px] z-[1] flex items-center justify-center "
                     >{items.length}</div>
                 }
-                    <Image layout='fill' objectFit='contain' src={CartSvg}/>
+                    <Image layout='fill' objectFit='contain' src={CartSvg} priority={true}/>
                 </Link>
             </div>
         </nav>
