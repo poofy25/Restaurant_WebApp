@@ -24,15 +24,7 @@ export default async function Home() {
       <HomeCategorySection section='Supe'/>
       <HomeCategorySection section='Snacks-uri'/>
       </div>
-      {/* {data?.length > 0 ? <>
-      {data.map((item , index) => {
-        return (
-          <MenuItem data={item} key={index}/>
-        )
-      })}
-      </>
-      : "Error"
-      } */}
+
     </main>
   );
 }
