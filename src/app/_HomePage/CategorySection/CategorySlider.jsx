@@ -33,8 +33,8 @@ export default function CategorySlider({data}) {
       <Slider {...settings}>
       {data.map((item , index) => {
         return (
-          <div className="w-full h-full p-0 box-border">
-            <MenuItem data={item} key={index} isSlider={true}/>
+          <div className="w-full h-full p-0 box-border" key={index}>
+            <MenuItem data={item}  isSlider={true}/>
           </div>
         )
       })}
