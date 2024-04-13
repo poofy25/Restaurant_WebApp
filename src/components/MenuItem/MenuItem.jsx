@@ -71,7 +71,7 @@ export default function MenuItem ( {data , isSlider} ) {
                     hover:bg-complimentary hover:text-white
 
                     ${styles.toCartBtn}
-                    ${addedToCart && 'bg-complimentary !text-black'} 
+                    ${addedToCart && '!bg-complimentary'} 
                     `} 
                     onClick={handleCartBtn}
                     disabled={addedToCart}
@@ -87,7 +87,7 @@ export default function MenuItem ( {data , isSlider} ) {
                         <>
                             <p className='hidden sm:flex self-center'>Adaugat în coș!</p>
                             <p className='flex sm:hidden self-center'>În coș!</p>
-                            <Image src={toCartSVG} width="24" height="24" alt='Cart Icon' className='!invert-0'/>
+                            <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
                         </>
                     } 
 
