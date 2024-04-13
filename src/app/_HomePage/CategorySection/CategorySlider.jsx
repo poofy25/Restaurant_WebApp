@@ -1,7 +1,11 @@
 'use client'
 
-import 'keen-slider/keen-slider.min.css'
-import { useKeenSlider } from 'keen-slider/react'
+import React from "react";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 import { useState } from 'react'
 
@@ -12,114 +16,29 @@ import navRightSVG from '/public/svgs/navRight.svg'
 
 import Image from 'next/image'
 
-export default function CategorySliver ({data}) {
-
-    const [currentSlide, setCurrentSlide] = useState(0)
-    const [loaded, setLoaded] = useState(false)
-    const [sliderRef, instanceRef] = useKeenSlider(
-      {
-        initial: 0,
-        slideChanged(slider) {
-            setCurrentSlide(slider.track.details.rel)
-        },
-        created() {
-            setLoaded(true)
-        },
-        slides: {
-            perView: 4,
-        },
-        breakpoints: {
-            "(min-width: 768px)": {
-              slides: { perView: 4 },
-            },
-            "(min-width: 1024px)": {
-              slides: { perView: 5 },
-            },
-          },
-        renderMode:"performance"
-      },
-    )
-  
-    return (
-        <div className='relative w-full h-full'>
-      <div ref={sliderRef} className="keen-slider relative">
-
-        { 
-            data.map((data, index)=>{
-                return(
-                        <MenuItem isSlider={true} data={data} key={index}/>
-                )
-            })
-        } 
-
-        {/* <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-blue-300 h-full'>1</div></div>
-        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-red-300 h-full'>2</div></div>
-        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-yellow-300 h-full'>3</div></div>
-        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-green-300 h-full'>4</div></div>
-        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-purple-300-300 h-full'>5</div></div>
-        <div className='h-[200px] p-4 box-border keen-slider__slide'><div className='bg-gray-300 h-full'>6</div></div>
- */}
-
-
-      
-      </div>
-
-      {loaded && instanceRef.current && instanceRef.current.track.details.slidesLength > 0 && (
-          <>
-            <Arrow
-              left
-              onClick={(e) =>
-                e.stopPropagation() || instanceRef.current?.prev()
-              }
-              disabled={currentSlide === 0}
-            />
-
-            <Arrow
-              onClick={(e) =>
-                e.stopPropagation() || instanceRef.current?.next()
-              }
-              disabled={
-                currentSlide === instanceRef.current.track.details.maxIdx
-              }
-            />
-          </>
-        )}
-
-
-      </div>
-    )
-  }
-
-
-  function Arrow(props) {
-    const disabled = props.disabled ? " arrow--disabled" : ""
-    return (
-
-        <button onClick={props.onClick} disabled={props.disabled}
-        className={` ${props.left ? 'left-0 translate-x-[-100%]' : 'right-0 translate-x-[100%]'}
-        absolute p-0 h-full w-fit top-0
-        bg-transparent hover:bg-transparent
-        disabled:hidden
-        `}
-        >
-        <Image className='invert'
-         src={props.left ? navLeftSVG : navRightSVG} height='32' width='32' alt='Navigate'/>
-        </button>
-    //   <svg
-    //     onClick={props.onClick}
-    //     className={`arrow ${
-    //       props.left ? "arrow--left" : "arrow--right"
-    //     } ${disabled}`}
-    //     xmlns="http://www.w3.org/2000/svg"
-    //     viewBox="0 0 24 24"
-    //   >
-    //     {props.left && (
-    //       <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-    //     )}
-    //     {!props.left && (
-    //       <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
-    //     )}
-    //   </svg>
-    )
-  }
-  
+export default function CategorySlider({data}) {
+  const settings = {
+    className: "center",
+    infinite: false,
+    slidesToShow: 5,
+    swipeToSlide: false,
+    afterChange: function(index) {
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
+    }
+  };
+  return (
+    <div className="slider-container">
+      <Slider {...settings}>
+      {data.map((item , index) => {
+        return (
+          <div className="w-full h-full p-0 box-border">
+            <MenuItem data={item} key={index} isSlider={true}/>
+          </div>
+        )
+      })}
+      </Slider>
+    </div>
+  );
+}

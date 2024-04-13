@@ -64,10 +64,9 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
             
             {/* To cart button */}
             <button className={`
-                w-full flex justify-between items-center bg-transparent p-4 cursor-pointer transition-all box-border
-                border border-yellow-300 border-solid rounded-lg
-                bg-yellow-300 text-black
-                hover:bg-yellow-300
+                w-full flex justify-between items-center p-3 cursor-pointer transition-all box-border
+                border border-complimentary border-solid rounded-lg
+              text-white bg-complimentary
                 ${styles.toCartBtn}
                 ${addedToCart && '!bg-transparent !text-white'} 
                 `} 
@@ -80,12 +79,12 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
                     <>
                         <div className='w-[24px]'></div>
                         <h3 className='flex'>Adaugă în coș</h3>
-                        <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
+                        <Image src={toCartSVG} width="32" height="32" alt='Cart Icon'/>
                     </> : 
                     <>
                         <div className='w-[24px]'></div>
                         <h3 className='flex'>Adăugat în coș !</h3>
-                        <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
+                        <Image src={toCartSVG} width="32" height="32" alt='Cart Icon'/>
                     </>
                 } 
 

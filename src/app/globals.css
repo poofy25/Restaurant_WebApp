@@ -2,14 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply bg-primary
+}
 html,
 body {
   padding: 0;
   margin: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: '__Truculenta_dbcab8', '__Truculenta_Fallback_dbcab8';
-  background-color: #1b1a1b;
   color: white;
 }
 :root:has(.no-doc-scroll) {
@@ -18,17 +19,24 @@ body {
 
 button , p , h1, h2, h3, h4, h5 {
   margin: 0;
-  font-family: '__Truculenta_dbcab8', '__Truculenta_Fallback_dbcab8';
+  font-family: inherit;
+  
+
 
 }
 button {
-  @apply drop-shadow-md bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 cursor-pointer border-none text-base ;
+  @apply drop-shadow-md bg-complimentary hover:bg-complimentary-dark text-white font-bold py-2 px-4 cursor-pointer border-none text-base ;
 }
 
 a {
-  @apply no-underline text-slate-100 hover:text-yellow-300
+  @apply no-underline text-slate-100 hover:text-complimentary
 }
 
 h2 {
-  @apply text-4xl
+  @apply text-3xl
+}
+
+
+.filterToComplimentary {
+  filter: invert(23%) sepia(61%) saturate(2642%) hue-rotate(339deg) brightness(98%) contrast(96%);
 }

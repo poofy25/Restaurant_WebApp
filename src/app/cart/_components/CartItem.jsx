@@ -25,7 +25,7 @@ export default function CartItem ({item , dispatch , isLastOne}) {
 
                 <div className="w-[60%] flex flex-col items-start gap-1">
                     <h2 className="text-2xl">{item.name}</h2>
-                    <button className='p-0 bg-transparent underline font-normal text-yellow-300 hover:bg-transparent'>Vezi detalii</button>                    
+                    <button className='p-0 bg-transparent underline font-normal text-complimentary hover:bg-transparent'>Vezi detalii</button>                    
                     <div className={styles.price}>
                     
                     {item.quantity > 1 

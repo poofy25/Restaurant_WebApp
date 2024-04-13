@@ -15,6 +15,10 @@ module.exports = {
           DEFAULT : '#1b1a1b',
           light: 'rgb(37, 36, 37)',
           lighter: 'rgb(57, 56, 57)'
+        },
+        'complimentary':{
+          DEFAULT : '#D43132',
+          dark : '#bf342a'
         }
       },
       aspectRatio: {

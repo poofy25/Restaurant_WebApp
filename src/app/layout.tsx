@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Truculenta } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext"
 import NavBar from '@/components/Navbar/NavBar'
 
-const truculenta = Truculenta({ subsets: ["latin"] });
+const cabin_sketch = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-repeat" style={{backgroundImage: `url(/imgs/bgTexture.png)`}}>
       <CartContextProvider>
-        <body className={truculenta.className}>
+        <body className={cabin_sketch.className}>
           <NavBar/>
           {children}
         </body>

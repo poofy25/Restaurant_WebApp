@@ -44,7 +44,7 @@ export default function NavBar () {
 
             {/* Logo */}
             <div className="relative h-full flex flex-col justify-center items-center">
-                <Link href='/' className="relative aspect-square h-[100%] flex invert">
+                <Link href='/' className="relative aspect-square h-[100%] flex">
                     <Image layout='fill' objectFit='contain' src={LogoPlaceHolder} priority={true}/>
                 </Link>
             </div>

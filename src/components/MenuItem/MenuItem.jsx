@@ -42,17 +42,17 @@ export default function MenuItem ( {data , isSlider} ) {
                 sm:w-[calc(33.33%)]
                 md:w-[calc(25%)]
                 lg:w-[calc(20%)] sm:p-4
-            hover:border-yellow-300
-            ${isSlider ? 'keen-slider__slide' : ''}
+            hover:border-complimentary
+            ${isSlider ? '!w-[calc(100%)]' : ''}
             `}>
                 {/* Item Image */}
                 <div onClick={handleOpenInfo}
-                className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden aspect-square sm:aspect-[10/14]'>
+                className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden aspect-square sm:aspect-[14/14]'>
                     <Image src={data.imageUrl} fill={true} alt='Item Image' loading='lazy'
                     sizes="(max-width: 640px) 35vw, (max-width: 764px) 27.5vw, , (max-width: 1024px) 20vw , 17.5vw"
-                    className='aspect-square sm:aspect-[10/14] flex-1 w-full object-cover  z-[-1] '
+                    className='aspect-square sm:aspect-[14/14] flex-1 w-full object-cover  z-[-1] '
                     />
-                    <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border'>{data.name}</h3>
+                    <h3 className='sm:hidden absolute left-2 bottom-2 z-1 pr-2 box-border text-base font-semibold'>{data.name}</h3>
                     <div className='sm:hidden z-[-1]  absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.5)]'></div>
                 </div>
 
@@ -67,10 +67,11 @@ export default function MenuItem ( {data , isSlider} ) {
                 {/* To cart button */}
                 <button className={`
                     w-full flex justify-between bg-transparent p-2 cursor-pointer transition-all box-border text-white
-                    border border-yellow-300 border-solid rounded-lg
-                    hover:bg-yellow-300 hover:text-black
+                    border border-complimentary border-solid rounded-lg
+                    hover:bg-complimentary hover:text-white
+
                     ${styles.toCartBtn}
-                    ${addedToCart && 'bg-yellow-300 !text-black'} 
+                    ${addedToCart && 'bg-complimentary !text-black'} 
                     `} 
                     onClick={handleCartBtn}
                     disabled={addedToCart}
