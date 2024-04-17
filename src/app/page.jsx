@@ -19,10 +19,10 @@ export default async function Home() {
     <main className='flex flex-wrap justify-start px-[7.5vw] gap-[3vw] sm:gap-0 bg-repeat'>
       {/* <HeroSection/> */}
       <div className="w-full flex flex-col gap-16">
-      {data.map((categoryData)=>{
+      {data.map((categoryData, index)=>{
         if(categoryData.active) {
           return (
-            <HomeCategorySection categoryData={categoryData}/>
+            <HomeCategorySection key={index} categoryData={categoryData}/>
             )
         }
       }
