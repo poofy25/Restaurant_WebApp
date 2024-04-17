@@ -19,6 +19,11 @@ export const GET = async () => {
           });
         
     } catch (error) {
-        return new NextResponse(error)
+      return new NextResponse(error, {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     }
 }
