@@ -1,0 +1,27 @@
+'use client'
+
+import Categories from "../categories/Categories"
+import CategorySubmenu from '../submenu/CategorySubmenu'
+
+import { useState } from "react"
+
+export default function CategoryMenu () {
+
+    const [selectedCategory , setSelectedCategory] = useState(null)
+    const [categoriesData , setCategoriesData] = useState([])
+
+    return (
+
+        <div className="w-full h-[calc(100vh-80px)] flex gap-8 px-[7.5vw] py-8 box-border">
+            <Categories 
+            categoriesData={categoriesData} setCategoriesData={setCategoriesData}
+            selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+            {selectedCategory && 
+            <CategorySubmenu 
+            categoriesData={categoriesData} setCategoriesData={setCategoriesData}
+            selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
+            }
+        </div>
+
+    )
+}

@@ -40,3 +40,21 @@ h2 {
 .filterToComplimentary {
   filter: invert(23%) sepia(61%) saturate(2642%) hue-rotate(339deg) brightness(98%) contrast(96%);
 }
+
+.noEffects{
+  @apply bg-transparent hover:bg-transparent
+}
+
+
+/* Remove arrows from input type number */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

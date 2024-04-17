@@ -1,16 +1,19 @@
 const menuCategories = [
     "Pizza" ,
-    "Mic dejun" ,
-    "Snacks-uri" ,
+    "Aperitive" ,
     "Salate" ,
     "Supe" ,
-    "Calde" ,
-    "Kids Menu" ,
-    "Pentru companii" ,
-    "Desert" ,
-    "Înghețată" ,
-    "Băuturi" ,
-    "Alcool" ,
+    "Pasta & Risotto" ,
+    "Fast Food" ,
+    "Bucate la comandă" ,
+    "Plăcinte" ,
+    "Garnituri" ,
+    "Dessert" ,
+    "Băuturi răcoritoare",
+    "Gustări la bere" ,
+    "Bere",
+    "Vin spumant",
+    "Vin"
 ]
 
 export default menuCategories

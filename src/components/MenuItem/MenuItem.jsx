@@ -1,5 +1,4 @@
 'use client'
-import styles from './menuItem.module.scss'
 
 import Image from "next/image"
 
@@ -11,7 +10,7 @@ import { useState } from 'react'
 
 import MenuItemInfo from './MenuItemInfo/MenuItemInfo'
 
-export default function MenuItem ( {data , isSlider} ) {
+export default function MenuItem ( {data , isSlider , styles} ) {
 
     const { dispatch } = useCartContext()
 
@@ -35,7 +34,7 @@ export default function MenuItem ( {data , isSlider} ) {
 
     return (
         <>
-            <div className={`
+            <div className={` text-white
                 w-[50%] p-2
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
@@ -44,7 +43,9 @@ export default function MenuItem ( {data , isSlider} ) {
                 lg:w-[calc(20%)] sm:p-4
             hover:border-complimentary
             ${isSlider ? '!w-[calc(100%)]' : ''}
-            `}>
+            `}
+            style={styles}
+            >
                 {/* Item Image */}
                 <div onClick={handleOpenInfo}
                 className='w-full flex flex-col relative cursor-pointer z-[1] rounded-lg overflow-hidden aspect-square sm:aspect-[14/14]'>
@@ -69,8 +70,6 @@ export default function MenuItem ( {data , isSlider} ) {
                     w-full flex justify-between bg-transparent p-2 cursor-pointer transition-all box-border text-white
                     border border-complimentary border-solid rounded-lg
                     hover:bg-complimentary hover:text-white
-
-                    ${styles.toCartBtn}
                     ${addedToCart && '!bg-complimentary'} 
                     `} 
                     onClick={handleCartBtn}
@@ -82,7 +81,7 @@ export default function MenuItem ( {data , isSlider} ) {
                         <>
                             <h4 className=''>{data.price} mdl</h4>
                             <p className='hidden sm:flex ml-auto mr-2'>În coș</p>
-                            <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
+                            <Image src={toCartSVG} width="24" height="24" className="invert" alt='Cart Icon'/>
                         </> : 
                         <>
                             <p className='hidden sm:flex self-center'>Adaugat în coș!</p>

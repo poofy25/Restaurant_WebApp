@@ -2,33 +2,35 @@
 
 import navNextSVG from '/public/svgs/navNext.svg'
 
-
 import Image from 'next/image'
 
-import { GetMenuItemsCategory } from '@/app/actions/MenuItemsActions' 
-
 import MenuItem from "@/components/MenuItem/MenuItem"
-import CategorySlider from './CategorySlider'
 
 import BrushStrokeImg from '/public/imgs/brushStroke.png' 
 
-async function getData (section) {
-    const response = await GetMenuItemsCategory(section)
-    return response
+async function getData (categoryID) {
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` ,
+    { next: { revalidate: 0 } } )
+    const responseJson = await response.json()
+
+    const activeData = responseJson.filter(item => item.active === true);
+    return activeData
 }
 
 
-export default async function HomeCategorySection ({section , isPage}) {
+export default async function HomeCategorySection ({categoryData , isPage}) {
 
-    
-    const data = await getData(section)
+    // Fetch items that belong to the category 
+    const data = await getData(categoryData._id)
 
+    console.log(data)
 
+        if(data.length <= 0 ) return ''
         return (
             <div className="flex flex-col w-full gap-2">
                 {/* Header */}
                 <div className="flex justify-between items-center px-[0.5rem] py-2 border-0 border-solid border-primay-light relative">
-                    <h2 className="w-full text-center">{section}</h2>
+                    <h2 className="w-full text-center">{categoryData.name}</h2>
                     <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                 </div>
 
@@ -39,28 +41,17 @@ export default async function HomeCategorySection ({section , isPage}) {
                     
   
                         {/* If the page is the category page then render the items without the slider */}
-                            { 
+                            { data.length > 0 ?
                                 data.map((data, index)=>{
-                                    return(
-                                        <MenuItem data={data} key={index}/>
-                                    )
+                                        return(
+                                            <MenuItem data={data} key={index}/>
+                                        )
                                 })
+                                :
+                                "There was an error"
                             }
+                        
                     
-                    
-                    {/* {!isPage && 
-
-                        // If the page isnt the category page then render the items for mobile
-                        <div className='flex flex-wrap w-full h-full md:hidden '>
-                            { 
-                                data.map((data, index)=>{
-                                    return(
-                                        <MenuItem data={data} key={index}/>
-                                    )
-                                })
-                            }
-                        </div>
-                    } */}
 
                 </div>
             </div>

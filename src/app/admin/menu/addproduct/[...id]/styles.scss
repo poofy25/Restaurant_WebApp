@@ -1,0 +1,14 @@
+.createProductForm input{
+    font-family: inherit;
+    font-weight: 500 !important;
+    @apply py-1 px-3 rounded border border-solid border-primary-lighter text-base max-w-[400px]
+}
+.createProductForm textarea{
+    font-family: inherit;
+    font-weight: 500 !important;
+    @apply py-1 px-3 rounded border h-[50px] overflow-hidden border-solid border-primary-lighter resize-none text-base max-w-[400px] font-normal
+
+}
+.createProductForm label {
+    @apply font-semibold m-0 mb-1 text-sm
+}
