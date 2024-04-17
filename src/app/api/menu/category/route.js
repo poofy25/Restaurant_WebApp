@@ -1,7 +1,7 @@
 
 import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
-import Category from "../../../../models/Category";
+import Category from "@/models/Category";
 
 export const GET = async () => {
     try{
@@ -19,6 +19,6 @@ export const GET = async () => {
           });
         
     } catch (error) {
-        return new NextResponse(JSON.stringify(error))
+        return new NextResponse(error)
     }
 }

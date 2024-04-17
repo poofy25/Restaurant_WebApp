@@ -9,9 +9,8 @@ export const GET = async () => {
        
         await connectToDB()
 
-        const menuItems = await MenuItem.find({}).sort({ order: 1 })
+        const menuItems = await MenuItem.find({}).sort({ createdAt: -1 });
         const data = menuItems
-        console.log(data)
         const jsonData = JSON.stringify(data);
 
         return new NextResponse(jsonData, {
