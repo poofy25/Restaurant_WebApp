@@ -6,7 +6,7 @@ import HomeCategorySection from '@/app/_HomePage/CategorySection/CategorySection
 
 export default async function Home() {
 
-  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category` , { next: { revalidate: 0 } })
+  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category` , { next: { revalidate: 10 } })
 
   const responseJson = await response.json()
   const activeData = responseJson.filter(category => category.active === true);
