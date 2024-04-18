@@ -8,12 +8,10 @@ import MenuItem from "@/components/MenuItem/MenuItem"
 
 import BrushStrokeImg from '/public/imgs/brushStroke.png' 
 
-export const revalidate = 3600
-
+const dynamic = 'force-dynamic'
 
 const getData = async (categoryID) => {
 
-    'use server'
     const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` )
     const responseJson = await response.json()
     console.log("CATEGORY ITEMS: " , responseJson)
@@ -25,7 +23,13 @@ const getData = async (categoryID) => {
 export default async function HomeCategorySection ({categoryData , isPage}) {
 
     // Fetch items that belong to the category 
-    const data = await getData(categoryData._id)
+
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryData._id}` )
+    const responseJson = await response.json()
+    console.log("CATEGORY ITEMS: " , responseJson)
+    const activeData = responseJson.filter(item => item.active === true);
+
+    const data = activeData
 
 
         if(data.length <= 0 ) return ''
