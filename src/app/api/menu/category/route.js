@@ -3,12 +3,13 @@ import { NextResponse } from "next/server";
 import connectToDB from '/src/utils/connectToDB.js'
 import Category from "@/models/Category";
 
-export const GET = async () => {
+export const GET = async (req) => {
     try{
        
         await connectToDB()
         const categories = await Category.find({}).sort({ order: 1 })
         const data = categories
+        console.log("DATA: " , data)
         const jsonData = JSON.stringify(data);
 
         return new NextResponse(jsonData, {
@@ -19,11 +20,6 @@ export const GET = async () => {
           });
         
     } catch (error) {
-      return new NextResponse(error, {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+        return new NextResponse(JSON.stringify(error))
     }
 }
