@@ -2,25 +2,24 @@
 import HomeCategorySection from '@/app/_HomePage/CategorySection/CategorySection'
 // import HeroSection from '@/components/Hero/Hero'
 
-const dynamic = 'force-dynamic'
 
-
-const GetCategories = async () => {
-  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category`)
-  const responseJson = await response.json()
-  return responseJson
-}
 
 export default async function Home() {
 
-  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category`)
+  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category` , { next: { revalidate: 0 } })
+
   const responseJson = await response.json()
-  console.log("DATA: " , responseJson)
-  const data = responseJson
+  const activeData = responseJson.filter(category => category.active === true);
+  console.log("CATEGORIES: " , activeData)
+
+  const data = activeData
+
   return (
     <main className='flex flex-wrap justify-start px-[7.5vw] gap-[3vw] sm:gap-0 bg-repeat'>
       <div className="w-full flex flex-col gap-16">
       <p>{Date.now()}</p>
+      <p>{data.length}</p>
+
 
       {data.map((categoryData, index)=>{
         if(categoryData.active) {
