@@ -10,7 +10,7 @@ import BrushStrokeImg from '/public/imgs/brushStroke.png'
 
 async function getData (categoryID) {
     const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` ,
-    { next: { revalidate: 10 } } )
+    { cache: 'no-store' } )
     const responseJson = await response.json()
 
     const activeData = responseJson.filter(item => item.active === true);
