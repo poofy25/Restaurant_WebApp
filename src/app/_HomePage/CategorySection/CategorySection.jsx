@@ -8,8 +8,12 @@ import MenuItem from "@/components/MenuItem/MenuItem"
 
 import BrushStrokeImg from '/public/imgs/brushStroke.png' 
 
+export const revalidate = 3600
+
+
 async function getData (categoryID) {
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` , { cache: 'no-store' } )
+    'use server'
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` )
     const responseJson = await response.json()
     console.log("CATEGORY ITEMS: " , responseJson)
     const activeData = responseJson.filter(item => item.active === true);

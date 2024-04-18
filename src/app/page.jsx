@@ -2,8 +2,11 @@
 import HomeCategorySection from '@/app/_HomePage/CategorySection/CategorySection'
 // import HeroSection from '@/components/Hero/Hero'
 
+export const revalidate = 3600
+
 async function GetCategories () {
-  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category` , { cache: 'no-store' })
+  'use server'
+  const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category`)
   const responseJson = await response.json()
   console.log("DATA: " , responseJson)
   return responseJson
