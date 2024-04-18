@@ -9,10 +9,9 @@ import MenuItem from "@/components/MenuItem/MenuItem"
 import BrushStrokeImg from '/public/imgs/brushStroke.png' 
 
 async function getData (categoryID) {
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` ,
-    { cache: 'no-store' } )
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` , { cache: 'no-store' } )
     const responseJson = await response.json()
-
+    console.log("CATEGORY ITEMS: " , responseJson)
     const activeData = responseJson.filter(item => item.active === true);
     return activeData
 }
@@ -23,7 +22,6 @@ export default async function HomeCategorySection ({categoryData , isPage}) {
     // Fetch items that belong to the category 
     const data = await getData(categoryData._id)
 
-    console.log(data)
 
         if(data.length <= 0 ) return ''
         return (
