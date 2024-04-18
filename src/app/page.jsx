@@ -4,7 +4,7 @@ import HomeCategorySection from '@/app/_HomePage/CategorySection/CategorySection
 
 export const revalidate = 3600
 
-async function GetCategories () {
+const GetCategories = async () => {
   'use server'
   const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category`)
   const responseJson = await response.json()

@@ -11,7 +11,8 @@ import BrushStrokeImg from '/public/imgs/brushStroke.png'
 export const revalidate = 3600
 
 
-async function getData (categoryID) {
+const getData = async (categoryID) => {
+
     'use server'
     const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryID}` )
     const responseJson = await response.json()
