@@ -151,7 +151,7 @@ export default function CreateProductForm ({category}) {
                     </div> 
                 </div>
 
-                <button className="font-semibold text-base rounded py-2" type="submit">{loading ? "Se creaza..." : "Crează produs"} </button>
+                <button className="font-semibold text-base rounded py-2" type="submit" disabled={loading}>{loading ? "Se creaza..." : "Crează produs"} </button>
                 {errorMsg && <div><p>{errorMsg}</p></div>}
                 {successMsg && <div className="bg-green-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{successMsg}</p></div>}
 
