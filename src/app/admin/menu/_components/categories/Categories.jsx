@@ -15,7 +15,7 @@ export default function Categories ({categoriesData , setCategoriesData ,selecte
         e.preventDefault()
 
         async function addCategoryToDb () {
-            fetch('/api/menuitems/category' , {
+            fetch('/api/menu/category' , {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify({ name: name })
@@ -30,7 +30,7 @@ export default function Categories ({categoriesData , setCategoriesData ,selecte
 
 
         async function getCategoriesFromDb () {
-            fetch('/api/menuitems/category')
+            fetch('/api/menu/getAllCategories/placeholder')
             .then((res) => res.json())
             .then((data) => {
                 console.log("GOT DATA:" , data)

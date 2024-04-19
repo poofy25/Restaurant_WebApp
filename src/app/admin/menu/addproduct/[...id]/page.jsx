@@ -10,7 +10,7 @@ export default function AdminMenuAddProductByCategory({params}) {
     const[categoryFromId , setCategoryFromId] = useState(null)
 
     useEffect(()=>{
-      fetch(`/api/menuitems/category/${categoryID}`)
+      fetch(`/api/menu/category/${categoryID}`)
       .then((res) => res.json())
       .then((data) => {
         setCategoryFromId(data[0])

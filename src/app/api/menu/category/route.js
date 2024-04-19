@@ -23,3 +23,24 @@ export const GET = async (req) => {
         return new NextResponse(JSON.stringify(error))
     }
 }
+
+export const POST = async (request) => {
+  try{
+      await connectToDB()
+      const data = await request.json()
+      console.log('request:' , data)
+      const createdCategory = await Category.create(data)
+      console.log('REPONSE:' , data)
+      
+      return new NextResponse(JSON.stringify(createdCategory) , {
+          status: 200,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+  } catch (error) {
+      return new NextResponse(JSON.stringify(error))
+  }
+}
+
+

@@ -14,9 +14,8 @@ export default async function HomeCategorySection ({categoryData , isPage}) {
 
     // Fetch items that belong to the category 
 
-    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryData._id}`,{ next: { revalidate: 0 } } )
+    const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/category/getitems/${categoryData._id}`,{ next: { revalidate: 10 } } )
     const responseJson = await response.json()
-    console.log("CATEGORY ITEMS: " , responseJson)
     const activeData = responseJson.filter(item => item.active === true);
 
     const data = activeData
@@ -28,7 +27,6 @@ export default async function HomeCategorySection ({categoryData , isPage}) {
                 {/* Header */}
                 <div className="flex justify-between items-center px-[0.5rem] py-2 border-0 border-solid border-primay-light relative">
                     <h2 className="w-full text-center">{categoryData.name}</h2>
-                    <p>{data.length}</p>
                     <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                 </div>
 

@@ -50,7 +50,7 @@ export default function CategoriesContainer ({categoriesData , setCategoriesData
     }
 
     useEffect(()=>{
-      fetch('/api/menuitems/category')
+      fetch('/api/menu/getAllCategories/placeholder')
       .then((res) => res.json())
       .then((data) => {
         setCategoriesData(data)

@@ -12,13 +12,13 @@ import noImageIMG from '/public/imgs/no-image.jpg'
 import { uploadPhoto } from "@/app/actions/MenuItemFormActions"
 
 
-export default function CreateProductForm ({category}) {
+export default function AdminEditProductForm ({productData}) {
 
-    const [name, setName] = useState('')
-    const [categoryID, setCategoryID] = useState('')
-    const [description, setDescription] = useState('')
-    const [weight, setWeight] = useState('')
-    const [price, setPrice] = useState('')
+    const [name, setName] = useState(productData?.name)
+    const [categoryID, setCategoryID] = useState(productData?.category)
+    const [description, setDescription] = useState(productData?.description)
+    const [weight, setWeight] = useState(productData?.weight)
+    const [price, setPrice] = useState(productData?.price)
     const [file, setFile] = useState([])
 
 
@@ -40,9 +40,48 @@ export default function CreateProductForm ({category}) {
     async function handleFormSubmit (e) {
         e.preventDefault()
 
+        // Form Data
+        const formData = new FormData()
+
+        formData.append('imageUrl' , productData.imageUrl)
+        formData.append('imageId' , productData.imageId)
+        formData.append('name', name)
+        formData.append('category', categoryID)
+        formData.append('description', description)
+        formData.append('price', price)
+        formData.append('weight', weight)
+
+        let isUploadingToCloud = null
+
+        if(file[0]) {
+            formData.append('files', file[0])
+            isUploadingToCloud = true
+            const res = await uploadPhoto(formData)
+            console.log("CLOUD RESPONSE: " , res)
+            if(res?.photoUrl && res?.photoId){
+                formData.append('imageUrl' ,res.photoUrl)
+                formData.append('imageId' , res.photoId)
+                isUploadingToCloud = false
+            } else {
+                console.log("UPLOAD CLOUD ERROR")
+                return
+            }
+        }
+
+        if(isUploadingToCloud === null || isUploadingToCloud === false) {
+            const databaseResponse = await fetch(`/api/menu/products/${productData._id}`,{
+                method:"PUT",
+                body:JSON.stringify(Object.fromEntries(formData))
+            })
+            const data = await databaseResponse.json()
+            console.log("UPDATED DATA : " , data)
+        }
+        
+
+
+        return
         if(!file.length) return alert('No image files are selected!')
 
-        const formData = new FormData()
 
         formData.append('files', file[0])
         
@@ -63,7 +102,7 @@ export default function CreateProductForm ({category}) {
             newFormData.append('weight', weight)
 
             // Send data to databbase
-            const databaseResponse = await fetch('/api/menu/products',{
+            const databaseResponse = await fetch('/api/menuitems',{
                 method:"POST",
                 body:JSON.stringify(Object.fromEntries(newFormData))
             })
@@ -81,15 +120,12 @@ export default function CreateProductForm ({category}) {
 
     }
 
-    useEffect(()=>{
-        setCategoryID(category?._id)
-    },[category])
 
 
 
     return (
         <div className="flex justify-center items-center w-full gap-4">
-        <form onSubmit={handleFormSubmit} className="createProductForm justify-center flex gap-4 bg-white p-4 rounded">
+        <form onSubmit={handleFormSubmit} className="editProductForm justify-center flex gap-4 bg-white p-4 rounded">
 
             {/* First Column */}
             <div className="min-w-[20vw] flex-col flex gap-2">
@@ -99,7 +135,7 @@ export default function CreateProductForm ({category}) {
                 </div>
                 <div className="flex flex-col"> 
                     <label>Categorie</label>
-                    <input type="text" required value={category ? category.name : ""} disabled onChange={(e)=>setCategoryID(category._id)}/>
+                    <input type="text" required value={categoryID} disabled onChange={(e)=>setCategoryID(category._id)}/>
                 </div>
                 <div className="flex flex-col">
                     <label>Descriere</label>
@@ -129,12 +165,16 @@ export default function CreateProductForm ({category}) {
                     <div className={`flex items-center justify-center w-full h-fit relative z-10 box-border`}>
                         <label htmlFor="dropzone-file" className="flex flex-col items-center !m-0 justify-center w-full aspect-square border border-solid border-primary-lighter rounded cursor-pointer">
                             <div className="flex flex-col items-center justify-center">
-                               {!file[0] && <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Adauga o imagine</span></p> }
+                               {!file[0] || !productData.imageUrl && <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Adauga o imagine</span></p> }
                             </div>
-                            <input id="dropzone-file" type="file" required className="absolute w-0 opacity-0" accept="image/*" onChange={handleInputFile}/>
+                            <input id="dropzone-file" type="file" className="absolute w-0 opacity-0" accept="image/*" onChange={handleInputFile}/>
                         </label>
                         {/* Show image after upload */}
-                        {file[0] &&<div className="w-full h-full -z-10 absolute p-2 box-border"> <Image src={URL.createObjectURL(file[0])} width='500' height='500' className='object-cover w-full h-full box-border rounded -z-10'/> </div>}
+                        {file[0] ? <>
+                            <div className="w-full h-full -z-10 absolute p-2 box-border"> <Image src={file[0] && URL.createObjectURL(file[0])} width='500' height='500' className='object-cover w-full h-full box-border rounded -z-10'/> </div>
+                        </> : <>
+                        <div className="w-full h-full -z-10 absolute p-2 box-border"> <Image src={productData.imageUrl} width='500' height='500' className='object-cover w-full h-full box-border rounded -z-10'/> </div>
+                        </>}
                     </div> 
                 </div>
 
@@ -151,7 +191,7 @@ export default function CreateProductForm ({category}) {
                 description,
                 price,
                 weight,
-                imageUrl:file[0] ? URL.createObjectURL(file[0]) : noImageIMG
+                imageUrl:file[0] && URL.createObjectURL(file[0]) || productData?.imageUrl  ||  noImageIMG
             }}
             styles={{ "height":"fit-content" , "width":"250px"}}
             />

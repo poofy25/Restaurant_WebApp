@@ -10,7 +10,7 @@ export default function CategorySubmenu ({categoriesData , setCategoriesData ,se
     const handleDeleteCategory = async () => {
 
         async function deleteFromDb () {
-            await fetch(`/api/menuitems/category/${selectedCategory._id}` , {
+            await fetch(`/api/menu/category/${selectedCategory._id}` , {
                 method: 'DELETE',
                 headers: {
                   'Content-Type': 'application/json',
