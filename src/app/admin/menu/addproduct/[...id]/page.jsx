@@ -18,7 +18,7 @@ export default function AdminMenuAddProductByCategory({params}) {
     },[])
     return (
       <main className='flex flex-col flex-wrap items-center justify-center w-full h-[calc(100vh-80px)] px-[7.5vw] py-8 gap-8 box-border'>
-        <div className="w-fit flex flex-col gap-4 h-fit  text-primary p-4">
+        <div className="w-full flex flex-col gap-4 h-fit  text-primary p-4">
           <h3 className='font-normal bg-white text-black rounded p-4'>Creaza un produs in categoria : <span className='font-bold'>{categoryFromId ? categoryFromId.name : "..."}</span> </h3>
           <CreateProductForm category={categoryFromId}/>
         </div>

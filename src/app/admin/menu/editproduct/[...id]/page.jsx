@@ -13,6 +13,7 @@ export default function AdminMenuEditProduct({params}) {
     const productID = params.id
 
     const[product , setProduct] = useState(null)
+    const [deleteLoading , setDeleteLoading] = useState(false)
 
     useEffect(()=>{
       fetch(`/api/menu/products/${productID}`)
@@ -23,6 +24,7 @@ export default function AdminMenuEditProduct({params}) {
     },[])
 
     const handleDelete = async () => {
+        setDeleteLoading(true)
         const response = await fetch(`/api/menu/products/${product._id}` , {
             method: 'DELETE',
             headers: {
@@ -31,15 +33,16 @@ export default function AdminMenuEditProduct({params}) {
             body: JSON.stringify({ id: product._id , imageId:product.imageId}),
         });
         const data = await response.json()
+        setDeleteLoading(false)
         if(data.success === true) router.push('/admin/menu')
     }
 
     return (
       <main className='flex flex-col flex-wrap items-center justify-center w-full h-[calc(100vh-80px)] px-[7.5vw] py-8 gap-8 box-border'>
-        <div className="w-fit flex flex-col gap-4 h-fit  text-primary p-4">
+        <div className="w-full flex flex-col gap-4 h-fit  text-primary p-4">
           <div className='flex justify-between bg-white rounded p-4 items-center' >
             <h3 className='font-normal  text-black '>Editeaza produsul : <span className='font-bold'>{product ? product.name : "..."}</span> </h3>
-            {product && <button onClick={handleDelete}>Sterge produsul</button> }
+            {product && <button onClick={handleDelete} disabled={deleteLoading}>{deleteLoading ? "Se sterge..." : "Sterge"}</button> }
           </div>
           {product && 
           <AdminEditProductForm productData={product}/>

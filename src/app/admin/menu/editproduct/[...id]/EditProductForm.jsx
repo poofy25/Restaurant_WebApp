@@ -22,6 +22,11 @@ export default function AdminEditProductForm ({productData}) {
     const [file, setFile] = useState([])
 
 
+    const [loading , setLoading] = useState(false)
+    const [errorMsg , setErrorMsg] = useState(null)
+    const [successMsg , setSuccessMsg] = useState(null)
+
+
     // Handles the file input
     async function handleInputFile (e) {
         const file = e.target.files
@@ -40,6 +45,9 @@ export default function AdminEditProductForm ({productData}) {
     async function handleFormSubmit (e) {
         e.preventDefault()
 
+        setLoading(true)
+        setErrorMsg(null)
+        setSuccessMsg(null)
         // Form Data
         const formData = new FormData()
 
@@ -57,13 +65,12 @@ export default function AdminEditProductForm ({productData}) {
             formData.append('files', file[0])
             isUploadingToCloud = true
             const res = await uploadPhoto(formData)
-            console.log("CLOUD RESPONSE: " , res)
             if(res?.photoUrl && res?.photoId){
                 formData.append('imageUrl' ,res.photoUrl)
                 formData.append('imageId' , res.photoId)
                 isUploadingToCloud = false
             } else {
-                console.log("UPLOAD CLOUD ERROR")
+                setErrorMsg("A aparut o problema!")
                 return
             }
         }
@@ -74,49 +81,17 @@ export default function AdminEditProductForm ({productData}) {
                 body:JSON.stringify(Object.fromEntries(formData))
             })
             const data = await databaseResponse.json()
+
+            if(data.acknowledged === true) {
+                setSuccessMsg("A fost actualizat cu success!")
+            } else {
+                setErrorMsg("A aparut o problema!")
+            }
             console.log("UPDATED DATA : " , data)
         }
+
+        setLoading(false)
         
-
-
-        return
-        if(!file.length) return alert('No image files are selected!')
-
-
-        formData.append('files', file[0])
-        
-        
-        // Upload photo to Cloud
-        const res = await uploadPhoto(formData)
-
-        // Check if the response is valid
-        if(res?.photoUrl && res?.photoId) {
-            const newFormData = new FormData()
-
-            newFormData.append('imageUrl' , res?.photoUrl)
-            newFormData.append('imageId' , res?.photoId)
-            newFormData.append('name', name)
-            newFormData.append('category', categoryID)
-            newFormData.append('description', description)
-            newFormData.append('price', price)
-            newFormData.append('weight', weight)
-
-            // Send data to databbase
-            const databaseResponse = await fetch('/api/menuitems',{
-                method:"POST",
-                body:JSON.stringify(Object.fromEntries(newFormData))
-            })
-            const data = await databaseResponse.json()
-            // Check if database response is successful 
-            if(data?._id) {
-                setFile([])
-                setName('')
-                setCategoryID('')
-                setDescription('')
-                setPrice('')
-                setWeight('')
-            }
-        } else { alert("Error : " , res?.error) }
 
     }
 
@@ -124,11 +99,11 @@ export default function AdminEditProductForm ({productData}) {
 
 
     return (
-        <div className="flex justify-center items-center w-full gap-4">
-        <form onSubmit={handleFormSubmit} className="editProductForm justify-center flex gap-4 bg-white p-4 rounded">
+        <div className="flex flex-col justify-center items-center w-full gap-4 sm:flex-row">
+        <form onSubmit={handleFormSubmit} className="editProductForm justify-center flex gap-4 bg-white p-4 w-full rounded">
 
             {/* First Column */}
-            <div className="min-w-[20vw] flex-col flex gap-2">
+            <div className="flex-1 flex-col flex gap-2">
                 <div className="flex flex-col">
                     <label>Nume</label>
                     <input type="text" required onChange={(e)=>setName(e.target.value)} value={name}/>
@@ -154,7 +129,7 @@ export default function AdminEditProductForm ({productData}) {
             
 
             {/* Second Column */}
-            <div className="min-w-[15vw] flex flex-col gap-2">
+            <div className="w-[40%] max-w-[250px] flex flex-col gap-2">
 
 
 
@@ -178,7 +153,9 @@ export default function AdminEditProductForm ({productData}) {
                     </div> 
                 </div>
 
-                <button className="font-semibold text-base rounded py-2" type="submit">Crează produs</button>
+                <button className="font-semibold text-base rounded py-2" type="submit" disabled={loading}>{loading ? "Se actualizeaza..." : "Actualizeaza"}</button>
+                {errorMsg && <div><p>{errorMsg}</p></div>}
+                {successMsg && <div className="bg-green-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{successMsg}</p></div>}
 
 
             </div>

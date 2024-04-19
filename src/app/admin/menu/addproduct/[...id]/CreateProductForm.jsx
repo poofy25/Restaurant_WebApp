@@ -21,6 +21,11 @@ export default function CreateProductForm ({category}) {
     const [price, setPrice] = useState('')
     const [file, setFile] = useState([])
 
+    
+    const [loading , setLoading] = useState(false)
+    const [errorMsg , setErrorMsg] = useState(null)
+    const [successMsg , setSuccessMsg] = useState(null)
+
 
     // Handles the file input
     async function handleInputFile (e) {
@@ -40,12 +45,15 @@ export default function CreateProductForm ({category}) {
     async function handleFormSubmit (e) {
         e.preventDefault()
 
-        if(!file.length) return alert('No image files are selected!')
+        setLoading(true)
+        setErrorMsg(null)
+        setSuccessMsg(null)
+
+        if(!file[0]) alert("NO IMAGE FILE")
 
         const formData = new FormData()
 
         formData.append('files', file[0])
-        
         
         // Upload photo to Cloud
         const res = await uploadPhoto(formData)
@@ -70,15 +78,20 @@ export default function CreateProductForm ({category}) {
             const data = await databaseResponse.json()
             // Check if database response is successful 
             if(data?._id) {
+                setSuccessMsg("A fost creat cu success!")
                 setFile([])
                 setName('')
                 setCategoryID('')
                 setDescription('')
                 setPrice('')
                 setWeight('')
+            } else {
+                setErrorMsg("A aparut o problema!")
             }
-        } else { alert("Error : " , res?.error) }
-
+        } else { 
+            setErrorMsg("A aparut o problema!")    
+        }
+        setLoading(false)
     }
 
     useEffect(()=>{
@@ -89,10 +102,10 @@ export default function CreateProductForm ({category}) {
 
     return (
         <div className="flex justify-center items-center w-full gap-4">
-        <form onSubmit={handleFormSubmit} className="createProductForm justify-center flex gap-4 bg-white p-4 rounded">
+        <form onSubmit={handleFormSubmit} className="createProductForm w-full justify-center flex gap-4 bg-white p-4 rounded">
 
             {/* First Column */}
-            <div className="min-w-[20vw] flex-col flex gap-2">
+            <div className="flex-1 flex-col flex gap-2">
                 <div className="flex flex-col">
                     <label>Nume</label>
                     <input type="text" required onChange={(e)=>setName(e.target.value)} value={name}/>
@@ -118,7 +131,7 @@ export default function CreateProductForm ({category}) {
             
 
             {/* Second Column */}
-            <div className="min-w-[15vw] flex flex-col gap-2">
+            <div className="w-[40%] max-w-[250px] flex flex-col gap-2">
 
 
 
@@ -138,7 +151,9 @@ export default function CreateProductForm ({category}) {
                     </div> 
                 </div>
 
-                <button className="font-semibold text-base rounded py-2" type="submit">Crează produs</button>
+                <button className="font-semibold text-base rounded py-2" type="submit">{loading ? "Se creaza..." : "Crează produs"} </button>
+                {errorMsg && <div><p>{errorMsg}</p></div>}
+                {successMsg && <div className="bg-green-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{successMsg}</p></div>}
 
 
             </div>
