@@ -3,12 +3,16 @@
 import Categories from "../categories/Categories"
 import CategorySubmenu from '../submenu/CategorySubmenu'
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function CategoryMenu () {
 
     const [selectedCategory , setSelectedCategory] = useState(null)
     const [categoriesData , setCategoriesData] = useState([])
+
+    useEffect(()=>{
+        console.log("Selected category: ",selectedCategory)
+    },[selectedCategory])
 
     return (
 

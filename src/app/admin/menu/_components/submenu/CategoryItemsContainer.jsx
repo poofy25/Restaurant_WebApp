@@ -3,6 +3,9 @@ import { useRouter } from "next/navigation"
 
 import CategoryItems from './categorySubmenuItems.jsx/CategoryItems'
 
+import { useEffect } from "react"
+import Link from "next/link"
+
 
 export default function CategoryItemsContainer ({categoriesData , setCategoriesData ,selectedCategory , setSelectedCategory}) {
 
@@ -10,7 +13,9 @@ export default function CategoryItemsContainer ({categoriesData , setCategoriesD
     return (
         <div>
             <div>
-                <button onClick={()=>router.push(`/admin/menu/addproduct/${selectedCategory._id}`)} >+ Adauga un articol</button>
+                <Link href={`/admin/menu/addproduct/${selectedCategory._id}`}
+                className="bg-red-500 p-2 px-4 hover:text-white font-semibold cursor-pointer"
+                >+ Adauga un articol</Link>
             </div>
             <div>
                 <CategoryItems selectedCategory={selectedCategory}/>

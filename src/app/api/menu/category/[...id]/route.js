@@ -4,11 +4,13 @@ import connectToDB from '/src/utils/connectToDB.js'
 import Category from "@/models/Category";
 
 
-export const GET = async () => {
+export const GET = async (req , {params}) => {
     try{
        
         await connectToDB()
-        const categories = await Category.find({}).sort({ order: 1 })
+        const categoryID = params.id[0]
+        console.log(categoryID)
+        const categories = await Category.find({_id:categoryID}).sort({ order: 1 })
         const data = categories
         const jsonData = JSON.stringify(data);
 
@@ -20,7 +22,7 @@ export const GET = async () => {
           });
         
     } catch (error) {
-        return new NextResponse(JSON.stringify(error))
+        return new NextResponse(error)
     }
 }
 

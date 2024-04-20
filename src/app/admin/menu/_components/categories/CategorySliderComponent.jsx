@@ -3,10 +3,6 @@
 import {useSortable} from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
-import {
-  restrictToParentElement, restrictToWindowEdges
-} from '@dnd-kit/modifiers'
-
 import Image from 'next/image'
 import DraggableSVG from '/public/svgs/draggable.svg'
 import NavRightSVG from '/public/svgs/navRight.svg'
@@ -37,7 +33,7 @@ export default function CategorySliderComponent ({data , index , selectedCategor
             </div>
             <div className={`mr-2 w-3 h-3 rounded-full ${data.active ? "bg-green-500" : "bg-gray-500"}`}></div>
             {data.name}
-            <button onClick={()=>setSelectedCategory(data)} className='p-0 noEffects m-0 ml-auto flex items-center'>
+            <button onClick={()=>{setSelectedCategory(data)}} className='p-0 noEffects m-0 ml-auto flex items-center'>
               <Image src={NavRightSVG} width='24' height='24' />
             </button>
         </div>
