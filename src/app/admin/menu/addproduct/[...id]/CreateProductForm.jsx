@@ -81,7 +81,6 @@ export default function CreateProductForm ({category}) {
                 setSuccessMsg("A fost creat cu success!")
                 setFile([])
                 setName('')
-                setCategoryID('')
                 setDescription('')
                 setPrice('')
                 setWeight('')
