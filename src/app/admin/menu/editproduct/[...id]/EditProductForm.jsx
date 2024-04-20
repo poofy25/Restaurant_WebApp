@@ -61,6 +61,7 @@ export default function AdminEditProductForm ({productData}) {
 
         let isUploadingToCloud = null
 
+        // Check if the image file has been change and upload it to the cloud
         if(file[0]) {
             formData.append('files', file[0])
             isUploadingToCloud = true
@@ -75,6 +76,8 @@ export default function AdminEditProductForm ({productData}) {
             }
         }
 
+        // Check if the image is being uploaded
+        // If not then upload the data to the database
         if(isUploadingToCloud === null || isUploadingToCloud === false) {
             const databaseResponse = await fetch(`/api/menu/products/${productData._id}`,{
                 method:"PUT",
@@ -154,7 +157,7 @@ export default function AdminEditProductForm ({productData}) {
                 </div>
 
                 <button className="font-semibold text-base rounded py-2" type="submit" disabled={loading}>{loading ? "Se actualizeaza..." : "Actualizeaza"}</button>
-                {errorMsg && <div><p>{errorMsg}</p></div>}
+                {errorMsg && <div className="bg-red-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{errorMsg}</p></div>}
                 {successMsg && <div className="bg-green-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{successMsg}</p></div>}
 
 

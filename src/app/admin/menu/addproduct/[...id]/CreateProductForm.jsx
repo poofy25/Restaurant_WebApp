@@ -86,10 +86,12 @@ export default function CreateProductForm ({category}) {
                 setPrice('')
                 setWeight('')
             } else {
-                setErrorMsg("A aparut o problema!")
+                console.log("DATABASE ERROR DATA:  ", data)
+                setErrorMsg("A aparut o problema! (Database)")
             }
         } else { 
-            setErrorMsg("A aparut o problema!")    
+            console.log("CLOUD ERROR DATA:  ", res)
+            setErrorMsg("A aparut o problema! (Cloud)")    
         }
         setLoading(false)
     }
@@ -152,7 +154,7 @@ export default function CreateProductForm ({category}) {
                 </div>
 
                 <button className="font-semibold text-base rounded py-2" type="submit" disabled={loading}>{loading ? "Se creaza..." : "Crează produs"} </button>
-                {errorMsg && <div><p>{errorMsg}</p></div>}
+                {errorMsg && <div className="bg-red-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{errorMsg}</p></div>}
                 {successMsg && <div className="bg-green-500 p-2 px-4 box-border font-semibold text-white rounded"><p>{successMsg}</p></div>}
 
 
