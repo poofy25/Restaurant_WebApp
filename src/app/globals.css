@@ -29,7 +29,7 @@ button {
 }
 
 a {
-  @apply no-underline text-slate-100 hover:text-complimentary
+  @apply no-underline text-slate-100
 }
 
 h2 {
@@ -60,5 +60,5 @@ input[type=number] {
 }
 
 button:disabled{
-  @apply opacity-50
+  @apply opacity-50 cursor-default
 }

@@ -41,7 +41,7 @@ export default function CartPage () {
                 <div className="flex flex-col py-4 box-border border-0 border-t-2 border-t-complimentary border-solid
                 sm:flex-1 sm:border-0 sm:pt-0
                 ">
-                    <h2 className='text-center text-3xl sm:pb-4 sm:border-0 sm:border-b-complimentary sm:border-b sm:border-solid'>Livrare</h2>
+                    <h2 className='text-center text-3xl sm:pb-4 sm:border-0 sm:border-b-complimentary sm:border-b-2 sm:border-solid'>Livrare</h2>
                     <div className='py-2 flex justify-between border-0 border-b-2 border-b-primary-lighter border-solid'><h3 className='font-normal'>Subtotal</h3><h3 className='font-normal'>{calculatePrice(items).subtotal + " mdl"}</h3></div>
                     <div className='py-2 flex justify-between border-0 border-b-2 border-b-primary-lighter border-solid'><h3 className='font-normal'>Livrare</h3><h3 className='font-normal'>{calculatePrice(items).delivery + " mdl"}</h3></div>
                     <div className='pt-4 flex justify-between'><h2>Total</h2><h2>{calculatePrice(items).total + " mdl"}</h2></div>
@@ -49,7 +49,7 @@ export default function CartPage () {
                     {/* Checkout button */}
                     <Link
                     className='bg-complimentary text-white font-bold text-xl
-                    flex justify-center items-center rounded-lg py-2 mt-4
+                    flex justify-center items-center rounded py-2 mt-4
                     hover:bg-complimentary-dark transition-all hover:text-white
                     '
                     href="/cart/checkout">Comandă</Link>

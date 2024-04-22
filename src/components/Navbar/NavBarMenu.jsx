@@ -34,7 +34,7 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
                 ">   
                     <Link href='/menu' className={styles.navBarMenuLink}>Menu</Link>
                     <Link href='/menu' className={styles.navBarMenuLink}>Meniu în sală</Link>
-                    <Link href='/menu' className={styles.navBarMenuLink}>Servicii</Link>
+                    {/* <Link href='/menu' className={styles.navBarMenuLink}>Servicii</Link> */}
                     <Link href='/menu' className={styles.navBarMenuLink}>Cariera</Link>
                     <Link href='/menu' className={`${styles.navBarMenuLink} !border-0`}>Contacte</Link>
                 </div>

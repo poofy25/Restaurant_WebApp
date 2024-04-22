@@ -21,7 +21,7 @@ export default function NavBar () {
 
 
     return (
-        <nav className="
+        <nav className=" navBar
         flex flex-row items-center w-full h-[80px] bg-[rgba(0,0,0,0.5)] overflow-hidden px-[7.5vw]
         relative justify-between box-border
         "
@@ -50,17 +50,17 @@ export default function NavBar () {
             </div>
 
             {/* Nav buttons */}
-            <div className="hidden ml-auto gap-8 [&_*]:py-4 sm:flex">
-                <Link href='/menu'>Menu</Link>
-                <Link href='/servicii'>Servicii</Link>
-                <Link href='/menu-local'>Meniu in sala</Link>
-                <Link href='/cariera'>Carieca</Link>
-                <Link href='/contacte'>Contacte</Link>
+            <div className="hidden ml-auto font-semibold gap-8 [&_*]:py-4 sm:flex">
+                <Link href='/menu' className='hover:text-complimentary transition-all'>Menu</Link>
+                {/* <Link href='/servicii'>Servicii</Link> */}
+                <Link href='/menu-local' className='hover:text-complimentary transition-all'>Meniu in sala</Link>
+                <Link href='/cariera' className='hover:text-complimentary transition-all'>Cariera</Link>
+                <Link href='/contacte' className='hover:text-complimentary transition-all'>Contacte</Link>
             </div>
 
             {/* Phone Number */}
-            <div className="hidden sm:flex ml-auto mr-8">
-                <Link href='tel:000000'>060951364</Link>
+            <div className="hidden font-semibold sm:flex ml-auto mr-8">
+                <Link href='tel:000000' className='hover:text-complimentary transition-all'>060951364</Link>
             </div>
 
 

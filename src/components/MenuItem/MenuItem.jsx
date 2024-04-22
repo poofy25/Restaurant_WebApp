@@ -59,17 +59,17 @@ export default function MenuItem ( {data , isSlider , styles} ) {
 
                 {/* Item name */}
                 <div className='hidden sm:flex w-full justify-between items-center p-2 box-border'>
-                    <h3 className='truncate'>{data.name}</h3>
-                    <button onClick={handleOpenInfo}
+                    <h4 className='truncate'>{data.name}</h4>
+                    <div onClick={handleOpenInfo}
                     className='bg-transparent invert border-0 cursor-pointer p-0 flex justify-center items-center'
-                    ><Image src={infoSVG} width="24" height="24" alt='Info Icon'/></button>
+                    ><Image src={infoSVG} width="24" height="24" alt='Info Icon'/></div>
                 </div>
                 
                 {/* To cart button */}
                 <button className={`
                     w-full flex justify-between bg-transparent p-2 cursor-pointer transition-all box-border text-white
                     border border-complimentary border-solid rounded-lg
-                    hover:bg-complimentary hover:text-white
+                    hover:bg-complimentary hover:text-white !disabled:bg-opacity-100
                     ${addedToCart && '!bg-complimentary'} 
                     `} 
                     onClick={handleCartBtn}
@@ -86,7 +86,7 @@ export default function MenuItem ( {data , isSlider , styles} ) {
                         <>
                             <p className='hidden sm:flex self-center'>Adaugat în coș!</p>
                             <p className='flex sm:hidden self-center'>În coș!</p>
-                            <Image src={toCartSVG} width="24" height="24" alt='Cart Icon'/>
+                            <Image src={toCartSVG} width="24" height="24" className="invert" alt='Cart Icon'/>
                         </>
                     } 
 
