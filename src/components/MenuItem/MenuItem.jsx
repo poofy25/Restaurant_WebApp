@@ -39,7 +39,7 @@ export default function MenuItem ( {data , isSlider , styles} ) {
                 relative flex flex-col overflow-hidden items-center
                 box-border border rounded-lg gap-2 transition-all border-solid border-transparent
                 sm:w-[calc(33.33%)]
-                md:w-[calc(25%)]
+                md:w-[calc(33.33%)]
                 lg:w-[calc(20%)] sm:p-4
             hover:border-complimentary
             ${isSlider ? '!w-[calc(100%)]' : ''}

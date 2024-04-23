@@ -62,3 +62,7 @@ input[type=number] {
 button:disabled{
   @apply opacity-50 cursor-default
 }
+
+textarea , input {
+  font-family: inherit;
+}

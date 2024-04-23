@@ -3,7 +3,13 @@
 import styles from './cartItem.module.scss'
 import Image from 'next/image'
 
+import { useState } from 'react'
+
+import MenuItemInfo from '@/components/MenuItem/MenuItemInfo/MenuItemInfo'
+
 export default function CartItem ({item , dispatch , isLastOne}) {
+
+    const [isOpenInfo , setIsOpenInfo] = useState(false)
 
     const handleRemove = () => {
         dispatch({type: 'REMOVE_ITEM', payload: item})
@@ -13,11 +19,13 @@ export default function CartItem ({item , dispatch , isLastOne}) {
     }
 
     return(
+        <>
             <div className={`flex w-full box-border items-stretch gap-4 py-4
             ${isLastOne ? "!border-0" : "border-0"} border-b-primary-lighter border-b-2 border-solid h-full relative
             `}>
-                    <div className='relative w-[40%] flex-1 rounded-lg overflow-hidden
-                    sm:max-w-[150px] shadow-xl
+                    <div onClick={()=>setIsOpenInfo(true)}
+                    className='relative w-[40%] flex-1 rounded-lg overflow-hidden shadow-xl cursor-pointer
+                    sm:max-w-[150px] 
                     '>
                         <Image className='object-cover'
                         src={item.imageUrl} fill={true} alt='Item Image'/>
@@ -25,7 +33,7 @@ export default function CartItem ({item , dispatch , isLastOne}) {
 
                 <div className="w-[60%] flex flex-col items-start gap-1">
                     <h2 className="text-2xl">{item.name}</h2>
-                    <button className='p-0 bg-transparent underline font-normal text-complimentary hover:bg-transparent'>Vezi detalii</button>                    
+                    <button onClick={()=>setIsOpenInfo(true)}  className='p-0 bg-transparent underline font-normal text-complimentary hover:bg-transparent'>Vezi detalii</button>                    
                     <div className={styles.price}>
                     
                     {item.quantity > 1 
@@ -47,5 +55,7 @@ export default function CartItem ({item , dispatch , isLastOne}) {
                     </div>
                 </div>
             </div>
+            {isOpenInfo && <MenuItemInfo data={item} setIsOpenInfo={setIsOpenInfo} /> }
+        </>
     )
 }

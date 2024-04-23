@@ -1,7 +1,7 @@
 'use client'
 
 
-import styles from './page.module.scss'
+import './page.scss'
 
 import { useCartContext } from '@/hooks/useCartContext'
 import { useEffect, useState , useRef} from 'react'
@@ -29,7 +29,7 @@ export default function CheckoutPage () {
     const [city , setCity] = useState('')
     const [sector , setSector] = useState('')
     const [info , setInfo] = useState('')
-    const [payment , setPayment] = useState('Cash at delivery')
+    const [payment , setPayment] = useState('Cash la livrare')
 
     const formRef = useRef()
     const confimrNumberRef = useRef()
@@ -66,7 +66,6 @@ export default function CheckoutPage () {
         if(response.ok){
             socket.emit('placedOrderClient', response.data);
             setFormMessage("Order sent successfuly")
-            console.log(response)
         } else {
             setFormMessage(response)
         } 
@@ -75,10 +74,8 @@ export default function CheckoutPage () {
     }
 
     useEffect(()=>{
-        console.log(phone , confirmPhone)
-        console.log(phone === confirmPhone)
         if(phone !== confirmPhone){
-            confimrNumberRef.current.setCustomValidity("Phone number is not matching"); 
+            confimrNumberRef.current.setCustomValidity("Nr. de telefon nu coincide."); 
         } else {
             confimrNumberRef.current.setCustomValidity("");
         }
@@ -89,21 +86,27 @@ export default function CheckoutPage () {
 
 
     return (
-        <main className={styles.main}>
-            <div className={styles.items}>
-                <h2>Delivery</h2>
-                    <form className={styles.form} onSubmit={handleFormSubmit} id="hook-form" ref={formRef}>
-                        <label>Nume *</label>
+        <main className='flex flex-col gap-4 px-[7.5vw] pb-8 box-border'>
+            <div className='flex flex-col gap-4 w-full'>
+                <h2 className='bg-transparent w-full box-border text-white text-center p-4 border-0 border-b-2 border-solid border-complimentary'>Livrare</h2>
+
+                    {/* Personal info Form */}
+                    <form className='checkoutForm' onSubmit={handleFormSubmit} id="hook-form" ref={formRef}>
+                        <label>Nume <span className='text-red-500'>*</span></label>
                         <input type='text'onChange={(e)=>{setName(e.target.value)}} value={name} required/>
-                        <label>Telefon *</label>
+                        <label>Telefon <span className='text-red-500'>*</span></label>
                         <input type='tel'onChange={(e)=>{setPhone(e.target.value)}} value={phone} required/>
-                        <label>Confirma Nr de Telefon *</label>
+                        <label>Confirma Nr de Telefon <span className='text-red-500'>*</span></label>
                         <input type='tel'onChange={(e)=>{setConfirmPhone(e.target.value)}} value={confirmPhone} ref={confimrNumberRef} required/>
                         <label>Email</label>
                         <input type='email' onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
-                        <label>Strada *</label>
+                        <label>Strada <span className='text-red-500'>*</span></label>
                         <input type='text' onChange={(e)=>{setStreet(e.target.value)}} value={street} required/>
-                        <div>
+                        <label>Oras <span className='text-red-500'>*</span></label>
+                        <input type='text' onChange={(e)=>{setCity(e.target.value)}} value={city} required/>
+                        <label>Sector <span className='text-red-500'>*</span></label>
+                        <input type='text' onChange={(e)=>{setSector(e.target.value)}} value={sector} required/>
+                        <div className='flex flex-col gap-2'>
                             <div>
                                 <label>Scara</label>
                                 <input type='text' onChange={(e)=>{setScara(e.target.value)}} value={scara}/>
@@ -117,26 +120,22 @@ export default function CheckoutPage () {
                                 <input type='text' onChange={(e)=>{setInterfon(e.target.value)}} value={interfon}/>
                             </div>
                         </div>
-                        <label>Oras *</label>
-                        <input type='text' onChange={(e)=>{setCity(e.target.value)}} value={city} required/>
-                        <label>Sector *</label>
-                        <input type='text' onChange={(e)=>{setSector(e.target.value)}} value={sector} required/>
                         <label>Informatie suplimentara</label>
-                        <textarea type='text' onChange={(e)=>{setInfo(e.target.value)}} value={info}/>
+                        <textarea type='text' className='h-[150px]' onChange={(e)=>{setInfo(e.target.value)}} value={info}/>
                     </form>
             </div>
 
-            <div className={styles.totalInfo}>
+            <div className=''>
                 <div><h1>Total</h1><h2>{calculatePrice(items).total + " mdl"}</h2></div>
                 <div><p>Subtotal</p><h3>{calculatePrice(items).subtotal + " mdl"}</h3></div>
                 <div><p>Delivery</p><h3>{calculatePrice(items).delivery + " mdl"}</h3></div>
-                <form className={styles.paymentForm}>
+                <form className=''>
                     <div>
-                        <label>Cash at delivey</label>
+                        <label>Cash la livrare</label>
                         <input type="radio" id="payment1" name="payment" value="Cash at delivery" onClick={(e)=>{setPayment(e.target.value)}} defaultChecked/>
                     </div>
                     <div>
-                        <label>Card at delivey</label>
+                        <label>Card la livrare</label>
                         <input type="radio" id="payment2" name="payment" value="Card at delivery" onClick={(e)=>{setPayment(e.target.value)}}/>
                     </div>
                 </form>

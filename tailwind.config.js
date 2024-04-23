@@ -18,7 +18,7 @@ module.exports = {
         },
         'complimentary':{
           DEFAULT : '#D43132',
-          dark : '#bf342a'
+          dark : '#9E2324'
         }
       },
       aspectRatio: {
