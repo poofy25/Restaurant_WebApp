@@ -142,21 +142,24 @@ export default function CheckoutPage () {
                     </form>
             </div>
 
-            <div className=''>
-                <div><h1>Total</h1><h2>{calculatePrice(items).total + " mdl"}</h2></div>
-                <div><p>Subtotal</p><h3>{calculatePrice(items).subtotal + " mdl"}</h3></div>
-                <div><p>Delivery</p><h3>{calculatePrice(items).delivery + " mdl"}</h3></div>
-                <form className=''>
-                    <div>
-                        <label>Cash la livrare</label>
-                        <input type="radio" id="payment1" name="payment" value="Cash at delivery" onClick={(e)=>{setPayment(e.target.value)}} defaultChecked/>
+            <div className='flex flex-col flex-1 h-fit gap-2'>
+                <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><h1>Total</h1><h2>{calculatePrice(items).total + " mdl"}</h2></div>
+                <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><p>Subtotal</p><p>{calculatePrice(items).subtotal + " mdl"}</p></div>
+                <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><p>Livrare</p><p>{calculatePrice(items).delivery + " mdl"}</p></div>
+                <div className='flex justify-between gap-4 my-2 font-semibold'>
+                    <div onClick={()=>setPayment('Cash la livrare')}
+                    className={` ${payment === "Cash la livrare" ? "bg-complimentary" : ''}
+                    flex items-center justify-center flex-1 px-4 py-4 border-2 border-solid border-complimentary rounded transition-all`}>
+                        <p className='text-center'>Cash la livrare</p>
                     </div>
-                    <div>
-                        <label>Card la livrare</label>
-                        <input type="radio" id="payment2" name="payment" value="Card at delivery" onClick={(e)=>{setPayment(e.target.value)}}/>
+                    <div onClick={()=>setPayment('Card la livrare')}
+                    className={` ${payment === "Card la livrare" ? "bg-complimentary" : ''}
+                    flex items-center justify-center flex-1 px-4     py-4 border-2 border-solid border-complimentary rounded transition-all`}>
+                        <p className='text-center'>Card la livrare</p>
                     </div>
-                </form>
-                <button disabled={loading} onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Sending order..." : "Order"}</button>
+                </div>
+                <button className='py-3 rounded'
+                disabled={loading} onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Se plaseaza comanda..." : "Plaseaza comanda"}</button>
                 {formMessage && 
                     formMessage.error ? 
                     <div>
