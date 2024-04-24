@@ -26,7 +26,7 @@ export default function CheckoutPage () {
     const [scara , setScara] = useState('')
     const [floor , setFloor] = useState('')
     const [interfon , setInterfon] = useState('')
-    const [city , setCity] = useState('')
+    const [city , setCity] = useState('Chisinau')
     const [sector , setSector] = useState('')
     const [info , setInfo] = useState('')
     const [payment , setPayment] = useState('Cash la livrare')
@@ -81,7 +81,7 @@ export default function CheckoutPage () {
         }
 
     },[phone , confirmPhone])
-
+    console.log(formMessage)
 
 
 
@@ -93,35 +93,52 @@ export default function CheckoutPage () {
                     {/* Personal info Form */}
                     <form className='checkoutForm' onSubmit={handleFormSubmit} id="hook-form" ref={formRef}>
                         <label>Nume <span className='text-red-500'>*</span></label>
-                        <input type='text'onChange={(e)=>{setName(e.target.value)}} value={name} required/>
+                        <input type='text'onChange={(e)=>{setName(e.target.value)}} value={name} placeholder='Nume' required/>
                         <label>Telefon <span className='text-red-500'>*</span></label>
-                        <input type='tel'onChange={(e)=>{setPhone(e.target.value)}} value={phone} required/>
+                        <input type='tel'onChange={(e)=>{setPhone(e.target.value)}} value={phone} placeholder='Telefon' required/>
                         <label>Confirma Nr de Telefon <span className='text-red-500'>*</span></label>
-                        <input type='tel'onChange={(e)=>{setConfirmPhone(e.target.value)}} value={confirmPhone} ref={confimrNumberRef} required/>
+                        <input type='tel'onChange={(e)=>{setConfirmPhone(e.target.value)}} value={confirmPhone} ref={confimrNumberRef} placeholder='Telefon' required/>
                         <label>Email</label>
-                        <input type='email' onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
+                        <input type='email' onChange={(e)=>{setEmail(e.target.value)}} value={email} placeholder='Email'/>
                         <label>Strada <span className='text-red-500'>*</span></label>
-                        <input type='text' onChange={(e)=>{setStreet(e.target.value)}} value={street} required/>
+                        <input type='text' onChange={(e)=>{setStreet(e.target.value)}} value={street} placeholder='Strada' required/>
                         <label>Oras <span className='text-red-500'>*</span></label>
-                        <input type='text' onChange={(e)=>{setCity(e.target.value)}} value={city} required/>
+                        {/* <input type='text' onChange={(e)=>{setCity(e.target.value)}} value={city} placeholder='Oras' required/> */}
+
+                        <select name="oras" id="oras" value={city} onChange={(e)=>{setCity(e.target.value)}} required>
+                            <option value="Chisinau">Chisinau</option>
+                        </select>
+
                         <label>Sector <span className='text-red-500'>*</span></label>
-                        <input type='text' onChange={(e)=>{setSector(e.target.value)}} value={sector} required/>
+                        {/* <input type='text' onChange={(e)=>{setSector(e.target.value)}} value={sector} placeholder='Sector' required/> */}
+
+                        <select name="oras" id="oras" value={sector} onChange={(e)=>{setSector(e.target.value)}} required >
+                            <option value="">Alege sectorul</option>
+                            <option value="Centru">Centru</option>
+                            <option value="Botanica">Botanica</option>
+                            <option value="Buiucani">Buiucani</option>
+                            <option value="Telecentru">Telecentru</option>
+                            <option value="Rascani">Rascani</option>
+                            <option value="Ciocana">Ciocana</option>
+                        </select>
+
+
                         <div className='flex flex-col gap-2'>
                             <div>
                                 <label>Scara</label>
-                                <input type='text' onChange={(e)=>{setScara(e.target.value)}} value={scara}/>
+                                <input type='text' onChange={(e)=>{setScara(e.target.value)}} placeholder='Scara' value={scara}/>
                             </div>
                             <div>
                                 <label>Etajul</label>
-                                <input type='text' onChange={(e)=>{setFloor(e.target.value)}} value={floor}/>
+                                <input type='text' onChange={(e)=>{setFloor(e.target.value)}} placeholder='Etajul' value={floor}/>
                             </div>
                             <div>
                                 <label>Interfon</label>
-                                <input type='text' onChange={(e)=>{setInterfon(e.target.value)}} value={interfon}/>
+                                <input type='text' onChange={(e)=>{setInterfon(e.target.value)}} placeholder='Interfon' value={interfon}/>
                             </div>
                         </div>
                         <label>Informatie suplimentara</label>
-                        <textarea type='text' className='h-[150px]' onChange={(e)=>{setInfo(e.target.value)}} value={info}/>
+                        <textarea type='text' className='h-[150px]' onChange={(e)=>{setInfo(e.target.value)}} placeholder='Informatie suplimentara' value={info}/>
                     </form>
             </div>
 
@@ -141,8 +158,13 @@ export default function CheckoutPage () {
                 </form>
                 <button disabled={loading} onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Sending order..." : "Order"}</button>
                 {formMessage && 
+                    formMessage.error ? 
                     <div>
-                        <p>{...formMessage}</p>
+                        <p>{formMessage.error}</p>
+                    </div>
+                    :
+                    <div>
+                        <p>{formMessage}</p>
                     </div>
                 }
             </div>

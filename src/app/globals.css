@@ -63,6 +63,6 @@ button:disabled{
   @apply opacity-50 cursor-default
 }
 
-textarea , input {
+textarea , input , option , select {
   font-family: inherit;
 }
