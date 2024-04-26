@@ -9,14 +9,18 @@ import { handleCheckout } from '@/app/actions/CheckoutActions'
 import { calculatePrice , calculateItems } from '@/utils/cartUtils'
 
 import { socket } from '@/utils/socket'
+import { useRouter } from 'next/navigation'
+
+import PlacedOrderMessage from "./PlacedOrderMessage"
 
 export default function CheckoutPage () {
 
 
     const [loading , setLoading] = useState(null)
-    const [formMessage , setFormMessage] = useState(null)
+    const [formSuccess , setFormSuccess] = useState(null)
 
-    const { items } = useCartContext()
+    const { items , dispatch } = useCartContext()
+    const router = useRouter()
 
     const [name , setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -35,11 +39,30 @@ export default function CheckoutPage () {
     const confimrNumberRef = useRef()
 
 
+    const resetForm = () => {
+        setName('')
+        setPhone('')
+        setConfirmPhone('')
+        setEmail('')
+        setStreet('')
+        setFloor('')
+        setInterfon('')
+        setCity('Chisinau')
+        setSector('')
+        setInfo('')
+        setPayment('Cash la livrare')
+    }
+
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
         setLoading(true)
-        setFormMessage(null)
+        setFormSuccess(null)
+
+        if(!items || items.length == 0) {
+            setFormSuccess(false)
+            return
+        }
 
         // Set form data as an object from inputs
         const formData = {
@@ -62,17 +85,23 @@ export default function CheckoutPage () {
         // Post order in database
         const response = await handleCheckout(formData)
 
-        // Send event to the server that an order has been set
+        console.log("Checkout Response: " , response)
+
+        // Send event to the socketIO server that an order has been set
         if(response.ok){
             socket.emit('placedOrderClient', response.data);
-            setFormMessage("Order sent successfuly")
+            setFormSuccess(true)
+            resetForm()
+            dispatch({type: 'SET_CART', payload:[]})
+
         } else {
-            setFormMessage(response)
+            setFormSuccess(false)
         } 
 
         setLoading(false)
     }
 
+    // Check if telephone number is matching
     useEffect(()=>{
         if(phone !== confirmPhone){
             confimrNumberRef.current.setCustomValidity("Nr. de telefon nu coincide."); 
@@ -81,13 +110,20 @@ export default function CheckoutPage () {
         }
 
     },[phone , confirmPhone])
-    console.log(formMessage)
+
+    useEffect(()=>{
+        if(!items || items.length === 0) {
+            router.push('/')
+        }
+    },[])
 
 
 
     return (
-        <main className='flex flex-col gap-4 px-[7.5vw] pb-8 box-border'>
-            <div className='flex flex-col gap-4 w-full'>
+        <main className='flex flex-col h-full relative gap-4 px-[7.5vw] pb-8 box-border
+        md:flex-row md:gap-8
+        '>
+            <div className='flex flex-col gap-4 w-full md:w-[60%]'>
                 <h2 className='bg-transparent w-full box-border text-white text-center p-4 border-0 border-b-2 border-solid border-complimentary'>Livrare</h2>
 
                     {/* Personal info Form */}
@@ -97,7 +133,7 @@ export default function CheckoutPage () {
                         <label>Telefon <span className='text-red-500'>*</span></label>
                         <input type='tel'onChange={(e)=>{setPhone(e.target.value)}} value={phone} placeholder='Telefon' required/>
                         <label>Confirma Nr de Telefon <span className='text-red-500'>*</span></label>
-                        <input type='tel'onChange={(e)=>{setConfirmPhone(e.target.value)}} value={confirmPhone} ref={confimrNumberRef} placeholder='Telefon' required/>
+                        <input type='tel'onChange={(e)=>{setConfirmPhone(e.target.value)}} value={confirmPhone} ref={confimrNumberRef} placeholder='Confirma telefon' required/>
                         <label>Email</label>
                         <input type='email' onChange={(e)=>{setEmail(e.target.value)}} value={email} placeholder='Email'/>
                         <label>Strada <span className='text-red-500'>*</span></label>
@@ -142,34 +178,31 @@ export default function CheckoutPage () {
                     </form>
             </div>
 
-            <div className='flex flex-col flex-1 h-fit gap-2'>
-                <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><h1>Total</h1><h2>{calculatePrice(items).total + " mdl"}</h2></div>
+            {/* Total price info */}
+            <div className='flex flex-col flex-1 h-fit gap-2 md:sticky md:top-0'>
+                <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2 md:py-4 md:border-complimentary md:border-b-2'><h2>Total</h2><h2>{calculatePrice(items).total + " mdl"}</h2></div>
                 <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><p>Subtotal</p><p>{calculatePrice(items).subtotal + " mdl"}</p></div>
                 <div className='flex justify-between border-0 border-b border-solid border-primary-lighter pb-2'><p>Livrare</p><p>{calculatePrice(items).delivery + " mdl"}</p></div>
+
+                {/* Payment type buttons */}
                 <div className='flex justify-between gap-4 my-2 font-semibold'>
-                    <div onClick={()=>setPayment('Cash la livrare')}
-                    className={` ${payment === "Cash la livrare" ? "bg-complimentary" : ''}
-                    flex items-center justify-center flex-1 px-4 py-4 border-2 border-solid border-complimentary rounded transition-all`}>
+                    <button onClick={()=>setPayment('Cash la livrare')}
+                    className={` ${payment === "Cash la livrare" ? "!bg-complimentary" : ''}
+                    flex items-center justify-center flex-1 px-4 py-4 border-2 border-solid border-complimentary bg-transparent rounded transition-all`}>
                         <p className='text-center'>Cash la livrare</p>
-                    </div>
-                    <div onClick={()=>setPayment('Card la livrare')}
-                    className={` ${payment === "Card la livrare" ? "bg-complimentary" : ''}
-                    flex items-center justify-center flex-1 px-4     py-4 border-2 border-solid border-complimentary rounded transition-all`}>
+                    </button>
+                    <button onClick={()=>setPayment('Card la livrare')}
+                    className={` ${payment === "Card la livrare" ? "!bg-complimentary" : ''}
+                    flex items-center justify-center flex-1 px-4     py-4 border-2 border-solid border-complimentary bg-transparent rounded transition-all`}>
                         <p className='text-center'>Card la livrare</p>
-                    </div>
+                    </button>
                 </div>
-                <button className='py-3 rounded'
+
+                {/* Place Order Button */}
+                <button className='py-4 rounded'
                 disabled={loading} onClick={()=>{formRef.current.requestSubmit()}}>{loading ? "Se plaseaza comanda..." : "Plaseaza comanda"}</button>
-                {formMessage && 
-                    formMessage.error ? 
-                    <div>
-                        <p>{formMessage.error}</p>
-                    </div>
-                    :
-                    <div>
-                        <p>{formMessage}</p>
-                    </div>
-                }
+
+                {formSuccess !== null && <PlacedOrderMessage success={formSuccess} setSuccess={setFormSuccess}/>}
             </div>
             
         </main>

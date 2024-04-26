@@ -1,5 +1,6 @@
 'use server'
 import HomeCategorySection from '@/app/_HomePage/CategorySection/CategorySection'
+import CategoriesSlider from '@/components/CategoriesSlider/CategoriesSlider'
 // import HeroSection from '@/components/Hero/Hero'
 
 
@@ -16,7 +17,7 @@ export default async function Home() {
   return (
     <main className='flex flex-wrap justify-start px-[7.5vw] gap-[3vw] sm:gap-0 bg-repeat'>
       <div className="w-full flex flex-col gap-16">
-
+      <CategoriesSlider categories={data}/>
       {data.map((categoryData, index)=>{
         if(categoryData.active) {
             return (

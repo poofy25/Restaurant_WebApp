@@ -58,8 +58,8 @@ export default function CartPage () {
 
             {/* Back to home button if no articles are in cart */}
                 <Link
-                    className='bg-complimentary text-white font-bold text-2xl
-                    flex justify-center items-center rounded-lg py-2 mt-4
+                    className='bg-complimentary text-white font-bold text-xl
+                    flex justify-center items-center rounded-lg py-2 px-8 mt-4
                     hover:bg-complimentary-dark transition-all
                     '
                     href="/">Vezi articole</Link>

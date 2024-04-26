@@ -1,5 +1,5 @@
 .checkoutForm {
-    @apply flex flex-col bg-transparent text-white  box-border gap-2 border-0 border-b-2 border-solid border-complimentary pb-4
+    @apply flex flex-col bg-transparent text-white  box-border gap-2 border-0 border-b-2 border-solid border-complimentary pb-4 md:border-b-0
 }
 .checkoutForm input , .checkoutForm textarea , .checkoutForm select , .checkoutForm option {
     @apply text-base p-2 rounded border border-solid border-[rgba(255,255,255,0.25)] text-white resize-none bg-primary
