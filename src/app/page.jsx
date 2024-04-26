@@ -4,20 +4,18 @@ import CategoriesSlider from '@/components/CategoriesSlider/CategoriesSlider'
 // import HeroSection from '@/components/Hero/Hero'
 
 
-
 export default async function Home() {
 
   const response = await fetch(`${process.env.WEBSITE_URL}/api/menu/getAllCategories/${Date.now()}` , { next : {revalidate : 10 }})
 
   const responseJson = await response.json()
   const activeData = responseJson.filter(category => category.active === true);
-
   const data = activeData
 
   return (
-    <main className='flex flex-wrap justify-start px-[7.5vw] gap-[3vw] sm:gap-0 bg-repeat'>
-      <div className="w-full flex flex-col gap-16">
-      <CategoriesSlider categories={data}/>
+    <main className='flex flex-wrap justify-start px-[7.5vw]  sm:gap-0 bg-repeat'>
+      <div className="w-full flex flex-col gap-8">
+      <CategoriesSlider categories={data} />
       {data.map((categoryData, index)=>{
         if(categoryData.active) {
             return (

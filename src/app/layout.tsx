@@ -4,7 +4,7 @@ import "./globals.css";
 import { CartContextProvider } from "@/context/CartContext"
 import NavBar from '@/components/Navbar/NavBar'
 
-const cabin_sketch = Montserrat({ subsets: ["latin"] });
+const cabin_sketch = Montserrat({ subsets: ["latin"] , display: "swap", });
 
 export const metadata = {
   title: "Create Next App",
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-repeat" style={{backgroundImage: `url(/imgs/bgTexture.png)`}}>
+    <html lang="en" className="textureBackground">
       <CartContextProvider>
         <body className={cabin_sketch.className}>
           <NavBar/>

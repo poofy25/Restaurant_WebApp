@@ -1,4 +1,5 @@
 'use server'
+import MenuItem from "@/models/MenuItem"
 import Category from "../../models/Category"
 import connectToDB from "@/utils/connectToDB"
 
@@ -18,5 +19,4 @@ export async function getCategoryFromName (name) {
     } catch (error) {
         return { error: error.message || 'An error occurred during checkout.' }; // Return an error object with message
     }
-
 }

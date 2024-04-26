@@ -19,6 +19,11 @@ body {
   overflow:hidden;
 }
 
+.noScrollBar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 button , p , h1, h2, h3, h4, h5 {
   margin: 0;
   font-family: inherit;
@@ -67,4 +72,9 @@ button:disabled{
 
 textarea , input , option , select {
   font-family: inherit;
+}
+
+.textureBackground {
+  background-image: url(/imgs/bgTexture.png) !important;
+  @apply bg-repeat
 }
