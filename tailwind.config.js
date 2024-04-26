@@ -17,6 +17,7 @@ module.exports = {
           lighter: 'rgb(57, 56, 57)'
         },
         'complimentary':{
+          
           DEFAULT : '#D43132',
           dark : '#9E2324'
         }

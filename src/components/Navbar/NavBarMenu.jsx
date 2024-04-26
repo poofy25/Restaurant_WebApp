@@ -15,7 +15,7 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
         `}>
 
             {/* Content */}
-            <div className="w-[300px] h-full bg-primary">
+            <div className="w-[300px] h-full bg-primary z-50">
 
                 {/* Nav menu */}
                 <div className="w-full h-[80px] flex  justify-start items-center box-border pl-[7.5vw]">
