@@ -25,7 +25,7 @@ export default async function HomeCategorySection ({categoryData , isPage}) {
         return (
             <div className="flex flex-col w-full gap-2 scroll-mt-[140px]" id={categoryData.name}>
                 {/* Header */}
-                <div className="flex justify-between items-center px-[0.5rem] py-2 border-0 border-solid border-primay-light relative">
+                <div className="flex justify-between items-center px-[0.5rem] py-2 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
                     <h2 className="w-full text-center">{categoryData.name}</h2>
                     <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                 </div>

@@ -30,7 +30,7 @@ export default function CategoriesSlider ({categories}) {
                     <Link style={{flex:"0 0 auto"}} scroll={true}
                         className=" flex items-center justify-center rounded text-center relative z-10
                         px-4 py-2 min-w-[calc(125px-0.5rem)] h-full box-border snap-center transition-all
-                        hover:translate-y-[-0.5rem] imageDropShadow
+                        hover:translate-y-[-0.5rem] imageDropShadow transform-gpu
                         sm:min-w-[calc(200px-0.5rem)]
                         "
                         key={index} href={`#${categoryData.name}`}>
