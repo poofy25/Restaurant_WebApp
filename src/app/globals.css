@@ -82,7 +82,3 @@ textarea , input , option , select {
 .imageDropShadow { 
   filter: drop-shadow(8px 8px 0px rgba(15,15,15,1));
 }
-
-.brushShadow { 
-  box-shadow: 0px 16px 0px 0px black;
-}
