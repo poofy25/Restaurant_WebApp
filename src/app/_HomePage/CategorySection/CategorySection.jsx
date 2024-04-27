@@ -23,7 +23,7 @@ export default async function HomeCategorySection ({categoryData , isPage}) {
 
         if(data.length <= 0 ) return ''
         return (
-            <div className="flex flex-col w-full gap-2 scroll-mt-[80px]" id={categoryData.name}>
+            <div className="flex flex-col w-full gap-2 scroll-mt-[160px]" id={categoryData.name}>
                 {/* Header */}
                 <div className="flex justify-between items-center px-[0.5rem] py-2 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
                     <h2 className="w-full text-center">{categoryData.name}</h2>
