@@ -86,3 +86,7 @@ textarea , input , option , select {
   -ms-filter: drop-shadow(8px 8px 0px rgb(15,15,15));
   -o-filter: drop-shadow(8px 8px 0px rgb(15,15,15));
 }
+
+.navBarBackground { 
+  background: url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%) !important;
+}

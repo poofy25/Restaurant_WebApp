@@ -1,7 +1,7 @@
 'use client'
 import styles from './navBar.module.scss'
 
-import { useState } from "react"
+import { useEffect, useState , useRef } from "react"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -18,15 +18,31 @@ export default function NavBar () {
 
     const {items , dispatch} = useCartContext()
     const [isMenuOpen , setIsMenuOpen] = useState(false)
+    const ref = useRef()
+
+    useEffect(()=>{
+
+        const handleScroll = (event) => {
+            if(window.innerHeight - window.scrollY <= 0){
+                ref.current.classList.add('navBarBackground')
+            } else {
+                ref.current.classList.remove('navBarBackground')
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        return ()=>{window.removeEventListener('scroll', handleScroll);}
+    },[])
 
 
     return (
-        <nav className={` navBar
-        flex flex-row items-center w-full h-[80px] bg-primary overflow-hidden px-[7.5vw]
-        justify-between box-border sticky top-0 z-50  transition-all
-        ${isMenuOpen ? "!fixed top-0" : ""}
+        <nav id='navbar' ref={ref}
+        className={` navBar
+        flex flex-row items-center w-full h-[80px] overflow-hidden px-[7.5vw]
+        justify-between box-border fixed top-0 z-50  transition-all
         `}
-        style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)"}}
+        // style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)" :  "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
+        style={{background: "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
         >
 
 

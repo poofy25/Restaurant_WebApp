@@ -12,7 +12,7 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
         onClick={(e)=>{if(e.target === e.currentTarget) setIsMenuOpen(false)}}
         className={`
             ${isMenuOpen ? 'top-[80px] no-doc-scroll' : 'top-[-100%]'}
-            w-full h-full fixed left-0 z-10 transition-all
+            w-full h-full fixed left-0 z-50 transition-all
             bg-[rgba(0,0,0,0.5)] 
             flex sm:hidden
         `}>
