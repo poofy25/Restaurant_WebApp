@@ -21,25 +21,28 @@ export default function NavBar () {
     const ref = useRef()
 
     useEffect(()=>{
-
+        console.log(window.location.pathname)
+                    
         const handleScroll = (event) => {
             if(window.innerHeight - window.scrollY <= 0){
-                ref.current.classList.add('navBarBackground')
+                ref.current.classList.add('lightNavBarBackground')
             } else {
-                ref.current.classList.remove('navBarBackground')
+                ref.current.classList.remove('lightNarBarBackground')
             }
         }
-
-        window.addEventListener('scroll', handleScroll);
+        if(window.location.pathname === '/') {
+            window.addEventListener('scroll', handleScroll);
+        }
         return ()=>{window.removeEventListener('scroll', handleScroll);}
-    },[])
+    },[window.location])
 
 
     return (
         <nav id='navbar' ref={ref}
         className={` navBar
         flex flex-row items-center w-full h-[80px] overflow-hidden px-[7.5vw]
-        justify-between box-border fixed top-0 z-40  transition-all
+        justify-between box-border sticky top-0 z-40  transition-all
+        bg-[url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)]
         `}
         style={{background: isMenuOpen ? "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)" : "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
         >
