@@ -26,7 +26,6 @@ export default function NavBar () {
         className={` navBar
         flex flex-row items-center w-full h-[80px] overflow-hidden px-[7.5vw]
         justify-between box-border sticky top-0 z-40  transition-all
-        ${isMenuOpen ? 'bg-[url(/imgs/bgTexture.png),linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)]' : ''}
         `}
         style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)"}}
         >
