@@ -18,7 +18,7 @@ export default function CategoriesSlider ({categories}) {
 
     return (
         <div ref={ref}
-        style={{background:!isSticky ? "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,0.85) 0%, rgba(27,26,27,1) 25%)" : ""}}
+        style={{background:"url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,0.85) 0%, rgba(27,26,27,1) 25%)"}}
         className= " px-[7.5vw] w-full py-4 mx-[-7.5vw] overflow-x-auto overflow-y-hidden sticky top-[79px] z-10 gap-[1rem] flex flex-nowrap  snap-x ">
         
         
