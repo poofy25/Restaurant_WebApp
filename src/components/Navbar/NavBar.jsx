@@ -41,8 +41,7 @@ export default function NavBar () {
         flex flex-row items-center w-full h-[80px] overflow-hidden px-[7.5vw]
         justify-between box-border fixed top-0 z-50  transition-all
         `}
-        // style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)" :  "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
-        style={{background: "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
+        style={{background: isMenuOpen ?  "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)" : "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
         >
 
 
