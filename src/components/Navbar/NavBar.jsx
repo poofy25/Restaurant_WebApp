@@ -21,11 +21,12 @@ export default function NavBar () {
 
 
     return (
-        <nav className=" navBar
-        flex flex-row items-center w-full h-[80px] bg-[rgba(0,0,0,0.5)] overflow-hidden px-[7.5vw]
-        justify-between box-border relative z-50
-        "
-        style={{background: "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(10,10,10,1) 100%)"}}
+        <nav className={` navBar
+        flex flex-row items-center w-full h-[80px] bg-primary overflow-hidden px-[7.5vw]
+        justify-between box-border sticky top-0 z-50  transition-all
+        ${isMenuOpen ? "!fixed top-0" : ""}
+        `}
+        style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)"}}
         >
 
 
@@ -43,7 +44,7 @@ export default function NavBar () {
 
 
             {/* Logo */}
-            <div className="relative h-full flex flex-col justify-center items-center">
+            <div onClick={()=>setIsMenuOpen(false)} className="relative h-full flex flex-col justify-center items-center">
                 <Link href='/' className="relative aspect-square h-[100%] flex">
                     <Image layout='fill' objectFit='contain' src={LogoPlaceHolder} priority={true}/>
                 </Link>
