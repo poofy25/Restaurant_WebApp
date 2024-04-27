@@ -32,8 +32,8 @@ export default function MenuItemInfo ({data , isOpenInfo , setIsOpenInfo}) {
 
     return (
         <div onClick={(e)=>{if(e.target === e.currentTarget){setIsOpenInfo(false)}}} 
-        className='flex justify-center items-center w-full h-full fixed z-10 left-0 top-0 bg-[rgba(0,0,0,0.95)]'>
-            <div className='w-full h-full rounded-lg z-20 bg-primary no-doc-scroll p-8 box-border flex flex-col items-center gap-8
+        className='flex justify-center items-center w-full h-full fixed z-[41] left-0 top-0 bg-[rgba(0,0,0,0.95)]'>
+            <div className='w-full h-full rounded-lg z-10 bg-primary textureBackground no-doc-scroll p-8 box-border flex flex-col items-center gap-8
             lg:w-fit lg:h-fit overflow-y-auto
             '>
 
