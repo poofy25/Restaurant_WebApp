@@ -18,33 +18,17 @@ export default function NavBar () {
 
     const {items , dispatch} = useCartContext()
     const [isMenuOpen , setIsMenuOpen] = useState(false)
-    const ref = useRef()
 
-    useEffect(()=>{
-        console.log(window.location.pathname)
-                    
-        const handleScroll = (event) => {
-            if(window.innerHeight - window.scrollY <= 0){
-                ref.current.classList.add('lightNavBarBackground')
-            } else {
-                ref.current.classList.remove('lightNarBarBackground')
-            }
-        }
-        if(window.location.pathname === '/') {
-            window.addEventListener('scroll', handleScroll);
-        }
-        return ()=>{window.removeEventListener('scroll', handleScroll);}
-    },[window.location])
 
 
     return (
-        <nav id='navbar' ref={ref}
+        <nav id='navbar'
         className={` navBar
         flex flex-row items-center w-full h-[80px] overflow-hidden px-[7.5vw]
         justify-between box-border sticky top-0 z-40  transition-all
-        bg-[url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)]
+        ${isMenuOpen ? 'bg-[url(/imgs/bgTexture.png),linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)]' : ''}
         `}
-        style={{background: isMenuOpen ? "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)" : "linear-gradient(0deg, rgba(27,26,27,0) 0%, rgba(10,10,10,1) 100%)"}}
+        style={{background: "url(/imgs/bgTexture.png) , linear-gradient(0deg, rgba(27,26,27,1) 0%, rgba(10,10,10,1) 100%)"}}
         >
 
 
@@ -84,7 +68,7 @@ export default function NavBar () {
 
 
             {/* Cart */}
-            <div className="relative h-full flex flex-col justify-center items-center">
+            <div onClick={()=>setIsMenuOpen(false)}  className="relative h-full flex flex-col justify-center items-center">
                 <Link href='/cart' className={`relative aspect-square h-[40%] flex invert`}>
                 {items.length > 0 &&
                     <div

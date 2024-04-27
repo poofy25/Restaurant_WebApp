@@ -5,10 +5,30 @@ import Image from "next/image"
 import BrushStrokeImg from '/public/imgs/brushStroke2.png' 
 import Logo from '/public/imgs/logo_placeholder.png'
 
-
+import { useEffect } from "react"
 
 export default function HeroSection () {
 
+
+    useEffect(()=>{
+        const ref = document.getElementById('navbar')
+        ref.classList.add('lightNavBarBackground')
+        const handleScroll = (event) => {
+            console.log('scroll')
+            if(window.innerHeight - window.scrollY <= 0){
+            console.log('scroll1')
+
+                ref.classList.remove('lightNavBarBackground')
+            } else {
+                ref.classList.add('lightNavBarBackground')
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+        return ()=>{
+            ref.classList.remove('lightNavBarBackground')
+            window.removeEventListener('scroll', handleScroll);
+        }
+    },[])
 
 
     return (
