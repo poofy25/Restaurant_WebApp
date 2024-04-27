@@ -12,7 +12,7 @@ export default function HeroSection () {
     return (
         <div 
         // style={{background:"url(/imgs/hero.jpg)"}}
-        className="flex flex-col z-[49] items-center justify-center bg-[url(/imgs/hero.jpg)] md:bg-[url(/imgs/hero2.jpg)] relative h-[100vh] top-0 w-[calc(100vw-(100vw-100%)] box-border !bg-cover !bg-center mx-[-7.5vw]">
+        className="flex flex-col z-[49] items-center justify-center bg-[url(/imgs/hero1.jpg)] md:bg-[url(/imgs/hero2.jpg)] relative h-[100vh] top-0 w-[calc(100vw-(100vw-100%)] box-border !bg-cover !bg-center mx-[-7.5vw]">
             <Image className="w-[50%] h-auto " src={Logo} width='500' height='500'/>
             <Link href='/#Pizza' className="flex justify-between mb-4 items-center w-[50%] px-8 py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
                 <h3 className="w-full text-center text-2xl">Meniu</h3>
