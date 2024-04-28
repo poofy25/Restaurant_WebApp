@@ -72,7 +72,7 @@ export default function NavBar () {
 
             {/* Phone Number */}
             <div className="hidden font-semibold sm:flex ml-auto mr-8">
-                <Link href='tel:000000' className='hover:text-complimentary transition-all'>060951364</Link>
+                <Link href='tel:000000' className='hover:text-complimentary transition-all'>+373 60 951 364</Link>
             </div>
 
 
@@ -82,7 +82,7 @@ export default function NavBar () {
                 <Link href='/cart' className={`relative aspect-square h-[40%] flex`}>
                 {items.length > 0 &&
                     <div
-                    className="absolute w-[20px] h-[20px] bg-white rounded-full right-[-6px] top-[-6px] z-[1] flex items-center justify-center text-complimentary font-bold "
+                    className="absolute w-[20px] h-[20px] bg-white rounded-full right-[-6px] top-[-6px] z-[1] flex items-center justify-center text-complimentary font-semibold "
                     >{items.length}</div>
                 }
                     <Image className='absolute left-[-50%] top-[-50%] w-[200%] h-[200%] filterToComplimentary '  src={roundBrushStroke} width='128' height='128'/>

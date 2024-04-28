@@ -51,7 +51,7 @@ export default function HeroSection () {
                 <Image className="object-cover"  src={Logo} fill={true} loading="eager"/>
             </div>
 
-            <div className="absolute w-full h-[100vh] left-0 top-[-80px] bg-[linear-gradient(0deg,rgba(249,87,147,0)0%,rgba(0,0,0,0.25)50%)] -z-10"></div>
+            <div className="absolute w-full h-[100vh] left-0 top-[-80px] bg-[linear-gradient(0deg,rgba(249,87,147,0)0%,rgba(0,0,0,0.25)80%)] -z-10"></div>
             {/* <Link href='/menu-local' className="flex justify-between items-center px-8 py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
                 <h3 className="w-full text-center text-2xl">Meniu în sală</h3>
                 <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>

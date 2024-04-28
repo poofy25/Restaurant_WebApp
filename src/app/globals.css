@@ -89,7 +89,7 @@ textarea , input , option , select {
 
 .logoDropShadow { 
   filter: drop-shadow(6px 4px 1px rgb(15,15,15));
-  -webkit-filter: drop-shadow(6px 4px 1px rgb(15,15,15));
+  -webkit-filter: drop-shadow(8px 8px 4px rgb(15,15,15));
   -moz-filter:  drop-shadow(6px 4px 1px rgb(15,15,15));
   -ms-filter: drop-shadow(6px 4px 1px rgb(15,15,15));
   -o-filter: drop-shadow(6px 4px 1px rgb(15,15,15));
@@ -100,8 +100,8 @@ textarea , input , option , select {
 }
 
 .fade-img{
-  -webkit-mask-image: linear-gradient(to bottom, white 50%, transparent);
-  mask-image: linear-gradient(to bottom, white 50%, transparent );
+  -webkit-mask-image: linear-gradient(to bottom, white 80%, transparent);
+  mask-image: linear-gradient(to bottom, white 80%, transparent );
 }
 
 /* .fade-img:after {
