@@ -23,6 +23,7 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
                 {/* Background Image */}
                 <div className="absolute w-full h-[100vh] -z-10 left-0 top-[-80px] bg-[url(/imgs/hero1.jpg)] md:bg-[url(/imgs/hero2.jpg)] !bg-cover !bg-center"></div>
                 <div className="absolute w-full h-[80px] z-10 left-0 top-[-80px] lightNavBarBackground "></div>
+                <div className="absolute w-full h-[100vh] left-0 top-[-80px] bg-[rgba(0,0,0,0.25)] -z-10"></div>
 
 
                 {/* Links */}

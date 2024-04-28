@@ -8,7 +8,7 @@ import Link from "next/link"
 
 import { useCartContext } from "@/hooks/useCartContext"
 
-import NoImage from '/public/imgs/no-image.jpg'
+import roundBrushStroke from '/public/imgs/roundBrushStroke.png'
 import LogoPlaceHolder from '/public/imgs/logo_placeholder.png'
 import CartSvg from '/public/svgs/cart.svg'
 
@@ -35,11 +35,21 @@ export default function NavBar () {
             <NavBarMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen}/>
             {/* Hamburger button */}
             <div className="relative h-full flex flex-col justify-center items-center sm:hidden ">
+
                 <button onClick={()=>setIsMenuOpen(current=>!current)}
-                className="relative w-[32px] h-[24px] p-0 bg-transparent hover:bg-transparent">
-                    <div className="w-full h-[2px] absolute top-0 left-0 bg-white rounded"></div>
-                    <div className="w-full h-[2px] absolute left-0 bg-white rounded"></div>
-                    <div className="w-full h-[2px] absolute bottom-0 left-0 bg-white rounded"></div>
+                className="relative w-[30px] h-[22px] p-0 bg-transparent hover:bg-transparent">
+
+
+                    <div className={`w-full h-[3px] absolute top-0 left-0 bg-white rounded transition-all
+                    ${isMenuOpen ? "rotate-45 translate-y-[10px]" : ""}
+                    `}></div>
+                    <div className={`w-full h-[3px] absolute left-0 translate-y-[-50%] bg-white rounded transition-all
+                    ${isMenuOpen ? "translate-x-[-100px]" : ""}
+                
+                    `}></div>
+                    <div className={`w-full h-[3px] absolute bottom-0 left-0 bg-white rounded transition-all
+                    ${isMenuOpen ? "-rotate-45 translate-y-[-9px]" : ""}
+                    `}></div>
                 </button>
             </div>
 
@@ -68,13 +78,16 @@ export default function NavBar () {
 
             {/* Cart */}
             <div onClick={()=>setIsMenuOpen(false)}  className="relative h-full flex flex-col justify-center items-center">
-                <Link href='/cart' className={`relative aspect-square h-[40%] flex invert`}>
+
+                <Link href='/cart' className={`relative aspect-square h-[40%] flex`}>
                 {items.length > 0 &&
                     <div
-                    className="absolute w-[20px] h-[20px] bg-red-600 invert rounded-full right-[-6px] top-[-6px] z-[1] flex items-center justify-center "
+                    className="absolute w-[20px] h-[20px] bg-white rounded-full right-[-6px] top-[-6px] z-[1] flex items-center justify-center text-complimentary font-bold "
                     >{items.length}</div>
                 }
-                    <Image layout='fill' objectFit='contain' src={CartSvg} priority={true}/>
+                    <Image className='absolute left-[-50%] top-[-50%] w-[200%] h-[200%] filterToComplimentary '  src={roundBrushStroke} width='128' height='128'/>
+
+                    <Image layout='fill' className='invert' objectFit='contain' src={CartSvg} priority={true}/>
                 </Link>
             </div>
         </nav>
