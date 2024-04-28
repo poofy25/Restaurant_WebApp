@@ -9,7 +9,7 @@ import Link from "next/link"
 import { useCartContext } from "@/hooks/useCartContext"
 
 import roundBrushStroke from '/public/imgs/roundBrushStroke.png'
-import LogoPlaceHolder from '/public/imgs/logo_placeholder.png'
+import logoImg from '/public/imgs/logo_cropped.png'
 import CartSvg from '/public/svgs/cart.svg'
 
 import NavBarMenu from './NavBarMenu'
@@ -56,8 +56,8 @@ export default function NavBar () {
 
             {/* Logo */}
             <div onClick={()=>setIsMenuOpen(false)} className="relative h-full flex flex-col justify-center items-center">
-                <Link href='/' className="relative aspect-square h-[100%] flex">
-                    <Image layout='fill' objectFit='contain' src={LogoPlaceHolder} priority={true}/>
+                <Link href='/' className="relative aspect-square h-[75%] flex">
+                    <Image layout='fill' objectFit='contain' src={logoImg} priority={true}/>
                 </Link>
             </div>
 
