@@ -11,7 +11,7 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
         <div 
         onClick={(e)=>{if(e.target === e.currentTarget) setIsMenuOpen(false)}}
         className={`
-            ${isMenuOpen ? 'top-[80px] no-doc-scroll' : 'top-[-100%]'}
+            ${isMenuOpen ? 'top-[80px] no-doc-scroll' : 'top-[-110%]'}
             w-full h-full fixed left-0 -z-30 transition-all
             bg-[rgba(0,0,0,0.5)] 
             flex sm:hidden
@@ -30,19 +30,19 @@ export default function NavBarMenu ({isMenuOpen , setIsMenuOpen}) {
                 <div className=" text-2xl w-full h-full
                 flex flex-col justify-start items-center gap-6  pt-[160px] box-border
                 ">   
-                    <Link href='/menu' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
+                    <Link href='/menu' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu hover:opacity-50 transition-all">
                         <h3 className="w-full text-center text-2xl">Meniu</h3>
                         <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                     </Link>
-                    <Link href='/menu-local' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
+                    <Link href='/menu-local' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu hover:opacity-50 transition-all">
                         <h3 className="w-full text-center text-2xl">Meniu în sală</h3>
                         <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                     </Link>
-                    <Link href='/cariera' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
+                    <Link href='/cariera' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu hover:opacity-50 transition-all">
                         <h3 className="w-full text-center text-2xl">Carieră</h3>
                         <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                     </Link>
-                    <Link href='/contacte' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu">
+                    <Link href='/contacte' className="flex justify-between items-center w-[75%] px-[0.5rem] py-3 border-0 border-solid border-primay-light relative imageDropShadow transform-gpu hover:opacity-50 transition-all">
                         <h3 className="w-full text-center text-2xl">Contacte</h3>
                         <Image src={BrushStrokeImg} className='filterToComplimentary -z-10' fill={true}/>
                     </Link>
