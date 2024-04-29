@@ -83,14 +83,14 @@ export default function CategoriesSlider ({categories}) {
 
         {data.map((categoryData, index)=>{
                 return (
-                    <SwiperSlide>
+                    <SwiperSlide key={index}>
                         <Link style={{flex:"0 0 auto"}} scroll={true}
                             className=" flex items-center justify-center rounded text-center relative z-10
                             px-6 py-3 min-w-[calc(125px-0.5rem)] h-full box-border snap-center transition-all
                             hover:translate-y-[-0.5rem] imageDropShadow transform-gpu
                             sm:min-w-[calc(200px-0.5rem)]
                             "
-                            key={index} href={`#${categoryData.name}`}>
+                            href={`#${categoryData.name}`}>
                                 <Image className=" -z-10 object-fill  filterToComplimentary" fill={true} src={BrushStrokeImg}/>
                                 <p className="z-10 font-bold text-base">{categoryData.name}</p>
                         </Link>
